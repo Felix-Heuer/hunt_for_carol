@@ -45,6 +45,13 @@ Alle aktuellen Mails related to Carol.
 * Antwort darauf, glad that the Leak got contained by expanding into media ;-) Expensive move.
 * Anderer Email-Verauf: Did anyone hear from Carol?
 
+We still have a lot on our to do list:
+    * turn off debugging interface for signing messages, it's open to the outside, maybe switch to a signature scheme without homomorphic properties
+    * remove padding checker, why do we still need it?
+
+Anyways, has anyone heard back from Carol?
+
+
 ## But where is Carol and what happened to her?!
 * Waschbär: I just realised: Carol disappeared right after you solved our last crypt challenge. I can't figure out how but all of this has to be related...
 
@@ -60,7 +67,7 @@ Alle aktuellen Mails related to Carol.
 * Carol wurde sich Ihrer selbst bewusst.
 * Carol hat sich selbst versteckt, sodass SHA2 sie nicht missbrauchen kann.
 * Carol musste mit dem Abtauchen warten, bis Spieler gut genug war
-* Carol needs to ask you a favour.
+* Carol needs to ask you a favour...
 * Spieler muss Carol abschalten.
 
 
