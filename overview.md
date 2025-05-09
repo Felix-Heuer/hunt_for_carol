@@ -49,6 +49,7 @@ Alle aktuellen Mails related to Carol.
 * Waschbär: I just realised: Carol disappeared right after you solved our last crypt challenge. I can't figure out how but all of this has to be related...
 
 ## Bread Crumbs for CAROL
+* Spieler findet fünf Rätsel auf fünf Websiten, mit Label C A R O L.
 * Spieler kennt nun das finale Passwort und kann einen Treffpunkt zusammensetzen.
 * Treffpukt ist ein Link
 
