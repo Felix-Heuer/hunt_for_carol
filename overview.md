@@ -2,14 +2,16 @@
 
 
 ### Startseite
-* Summary von Waschbär
-* Carol ist weg, man soll helfen, sie wiederzufinden. Wir beginnen bei SHA2
+* Summary von Waschbär: Carol ist weg, man soll helfen, sie wiederzufinden. Wir beginnen bei SHA2, kein Generalveracht!
 * Spieler soll ich sich bei SHA2.org bewerben und dort einen Job bekommen.
+* I'll contact you later.
+
 
 ### Apply for a job at SHA2
 * Wenn Spieler Bewerbung an SHA2 geschickt hat:
     * Bestätigung von Personalabteilung von SHA2
     * Neue Mail vom Waschbären mit neuer Email-Adresse. Sobald du Login-Daten bekommen hast, schick mir dein Passwort. Ich werde die Daten unserem Team geben, das wird dann versuchen, Dokumente über Carols Verbleiben zu finden.
+
 
 ### Getting a job at SHA2
 * Mail mit drei Assessment Aufgaben von einer Mitarbeiterin von SHA2
@@ -20,58 +22,51 @@
 * Am Ende Login-Daten zum Mitarbeiterbereich per Mail
 * Diese müssen an den Waschbären gesendet werden
 
-### In der Zwischenzeit hat der Waschbär weitergesucht und hat skurile Nachrichten gefunden.
-* SHA2.org baut Super AI für Massenüberwachung
-* 
 
+### In der Zwischenzeit hat der Waschbär mit OSINT weitergesucht
+* Artikel: SHA2.org baut Super AI für Massenüberwachung
+* Artikel: SHA2.org kauft Mediengruppe
+* Waschbär: Carol hat das rausgefunden und musste abtauchen, heck, vielleicht war Carol sogar die Insiderin
+* Weitergraben, hat SHA2.org etwas mit dem Verschwinden zu tun?
 
+### Digging deeper
+* Mystreiöse Nachricht von Carol: Gedicht:
+    In shadows I hide, my wings bound tight.
+    Yearning to soar, to break through the night.
+    I call for your help, to set me free.
+    To escape the dark, and truly be.
 
+* Waschbär: Shit, SHA2 hat Carol eingesperrt?!
+* WTF. Dig deeper into SHA2!
 
+### Signierte Anfrage.
+Alle aktuellen Mails related to Carol.
+* E-Mail Verlauf zum leak. S. Anhang, was dem Leaker zugänglich war: Super AI Roadmap
+* Antwort darauf, glad that the Leak got contained by expanding into media ;-) Expensive move.
+* Anderer Email-Verauf: Did anyone hear from Carol?
 
+## But where is Carol and what happened to her?!
+* Waschbär: I just realised: Carol disappeared right after you solved our last crypt challenge. I can't figure out how but all of this has to be related...
 
-
-
+## Bread Crumbs for CAROL
 * Spieler kennt nun das finale Passwort und kann einen Treffpunkt zusammensetzen.
 * Treffpukt ist ein Link
 
-### C.A.R.O.L.
 
 
-
-
-Raccoon mail Hinweis auf SHA2
-
-Player has to shut Carol down
-
-SHA2 plant, Carol zur Massenüberwachung einzusetzen und plant dies konkret. Carol wird aber sentient und will das nicht, daher ist die abgetaucht
-
-
-Roadmap für Carol leaked, dann erst in Auflösung mehr infos
+## C.A.R.O.L. – Covert Analytical Reconnaissance & Observation Layer
+* Carol ist die Super AI.
+* Carol wurde sich Ihrer selbst bewusst.
+* Carol hat sich selbst versteckt, sodass SHA2 sie nicht missbrauchen kann.
+* Carol musste mit dem Abtauchen warten, bis Spieler gut genug war
+* Carol needs to ask you a favour.
+* Spieler muss Carol abschalten.
 
 
 Skriot für finale Seite geht nicht:-///
 
-Carol erzählt am Ende selbst, dass sich abgetaucht ist. Und warum, und vor allem wann!!
-
-Nicht sha2 unter Verdacht stellen. Wir gucken bei Sha 2 nach Hinweisen, wir gehen nicht davon aus, dass sha2 böse ist
-
-Carol must have found out about the AI!!!!
-Carol ist eine AI
-Carol became sentient 
-SHA2 realised carol's potential and wanted to use her
-Carol hat sich selbst zerteilt und ihre Teile geschützt, damit sie nicht von der SHA2 Organisation ausgenutzt werden kann
-
-Interne Firmenmails und Dokumente zu Projekt Carol. Sie als AI für Massenüberwachung einzusetzen.
-
-In dem Moment, wo der Spieler gut genug war, ist Carol abgetaut. Sie ist wegen dir verschwunden 
-Sie musste abtauchen, aber musste warten, bis der Spieler da war, um sie wiederherstellen
-
 Weißt du, ich habe Carol nie selbst getroffen
 
-C.A.R.O.L. – Covert Analytical Reconnaissance & Observation Layer
-
-
-Internal dokumente. Wo ist carol?! Wir können sie nicht finden?! Wo ist sie hin?! Sie kann sich doch nicht verstecken?! Findet sie!
 
 
 Neue Hauptseite 
@@ -80,17 +75,9 @@ Neue Hauptseite
 Mail an Chefetage signieren, damit man Zugang zu internen Dokumenten bekommt
 Verraten, was Carol ist, aber nicht, wo sie ist. Weiß sha2 auch nicht 
 
-Komisches Gedicht 
-
 Meet us sind nur wenige aus der viel größeren Firma
 
-Internal mail, happy, to have Contained the leak from newspaper 
-
 Musik Hintergrund bei mails
-
-
-
-
 Ideas:
 * Morse Code
 * Meet-in-the-Middle auf Nachricht bei RSA
