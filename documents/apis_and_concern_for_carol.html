@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Internal Email Thread</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #eef1f5;
+      padding: 40px;
+      color: #333;
+    }
+    .email {
+      background: #ffffff;
+      border-left: 5px solid #1a73e8;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      padding: 20px 25px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+    }
+    .header {
+      font-size: 0.88em;
+      color: #777;
+      margin-bottom: 12px;
+    }
+    .subject {
+      font-size: 1.1em;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #202124;
+    }
+    .body {
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: theo.lang@sha2.org<br>
+    To: secops@sha2.org, devteam@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:01:08 -0400
+  </div>
+  <div class="subject">Subject: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Hey all,
+
+    Just raising this again: we still haven't switched off the debug API endpoints for signature verification.
+      These were supposed to be sunsetted in January:
+
+    Also—shouldn't we move away from that signature scheme with homomorphic properties?
+      It's overkill now and potentially introduces complexity we don’t want.
+
+    Oh, and while we’re at it, can we please kill the padding oracle leak in the legacy stack?
+
+      - Debugging interface for signatures:
+      - Debugging interface for padding in CBC mode
+
+    Thoughts?
+
+    Cheers,<br>
+    Theo
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: isabel.nguyen@sha2.org<br>
+    To: theo.lang@sha2.org, secops@sha2.org, devteam@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:08:37 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Hi Theo,
+
+    Totally agree on the debug endpoints—they're a liability at this point. I’ll prep a decommission script for review this afternoon.
+
+    I’m also in favor of dropping the homomorphic scheme. Unless someone has a use case to defend it, it’s just extra surface area.
+
+    And yeah, the padding oracle is still an open wound. It’s not exploitable in prod (as far as we know), but let’s kill it anyway.
+
+    Best,<br>
+    Isabel
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: jamal.foster@sha2.org<br>
+    To: isabel.nguyen@sha2.org, theo.lang@sha2.org, secops@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:12:55 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Hey folks,
+
+    Good calls all around. Let’s move fast on this—I'll coordinate with infra to disable the endpoints on staging first.
+
+    Side note: has anyone heard from Carol lately? I pinged her about a crypto audit flag on Monday and haven't gotten a response.
+
+    Cheers,<br>
+    Jamal
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: theo.lang@sha2.org<br>
+    To: jamal.foster@sha2.org, secops@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:16:10 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Huh—now that you mention it, I haven’t seen Carol in the SecOps Slack channel since last week. Was she on hold?
+
+    Maybe someone should check with her, just in case.
+
+    —Theo
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: isabel.nguyen@sha2.org<br>
+    To: secops@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:20:33 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    That’s odd. Carol usually replies fast, especially if it’s anything crypto-related.
+    I’ll try her other work line again but it’s been going straight to voicemail.
+
+    Let’s proceed with the cleanup efforts for now—I’ll keep you posted.
+
+    Stay sharp,<br>
+    Isabel Nguyen
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: nico.reyes@sha2.org<br>
+    To: secops@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:25:18 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Hey all,
+
+    Just catching up here. I also sent Carol a note on Friday—no reply. No read receipt either, which is weird.
+
+    Has anyone verified her daily check-ins recently?
+
+    —Nico
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: theo.lang@sha2.org<br>
+    To: nico.reyes@sha2.org, secops@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:29:42 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Nothing in the building logs that I can see. Last activity was… Tuesday morning last week?
+
+    Starting to feel a little off. Someone from management looped in?
+
+    —Theo
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: jamal.foster@sha2.org<br>
+    To: secops@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:35:20 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Can confirm—last network login was seven days ago. No VPN activity, no workstation pings. That’s not like her at all.
+
+    I’ll reach out to Carol’s assistant quietly and see if there’s anything we should know.
+
+    Let’s not overreact, but yeah… keep your eyes open.
+
+    Regards,<br>
+    Jamal Foster
+  </div>
+</div>
+
+</body>
+</html>
