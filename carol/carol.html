@@ -91,7 +91,7 @@
             padding: 10px;
             background-color: black;
             width: 100vw;
-            height: 100vh;
+            height: 95vh;
             overflow-y: scroll;
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -239,50 +239,57 @@ showCursorAfterDelay();
         }
 
         function showCursorAfterDelayShutdown() {
-            const cursorWrapper = document.createElement("div");
-            cursorWrapper.id = "cursorWrapper";
-            cursorWrapper.innerHTML = "<span id='cursor'>█</span>";
-            cursorWrapper.style.position = "relative";
-            cursorWrapper.style.top = "-175px";
-            document.body.appendChild(cursorWrapper);
+    // Ensure background is pure black and all visuals removed
+    document.querySelectorAll('.bg-img').forEach(img => img.remove());
+    document.body.style.backgroundImage = "none";
+    document.body.style.backgroundColor = "black";
 
-            const cursor = document.getElementById("cursor");
-            cursor.style.color = "#66ff66";
-            cursor.style.fontSize = "24px";
+    const cursorWrapper = document.createElement("div");
+    cursorWrapper.id = "cursorWrapper";
+    cursorWrapper.innerHTML = "<span id='cursor'>█</span>";
+    cursorWrapper.style.position = "relative";
+    cursorWrapper.style.top = "-100px";
+    document.body.appendChild(cursorWrapper);
 
-            const DURATION = 25000;
-            const START_TIME = Date.now();
-            const INITIAL_BLINK_INTERVAL = 250;
-            const FINAL_BLINK_INTERVAL = 3000;
+    const cursor = document.getElementById("cursor");
+    cursor.style.color = "#66ff66";
+    cursor.style.fontSize = "24px";
 
-            let isVisible = true;
-            let lastBlinkTime = START_TIME;
+    const DURATION = 25000;
+    const START_TIME = Date.now();
+    const INITIAL_BLINK_INTERVAL = 250;
+    const FINAL_BLINK_INTERVAL = 3000;
 
-            function animate() {
-                const currentTime = Date.now();
-                const elapsedTime = currentTime - START_TIME;
-                const progress = Math.min(elapsedTime / DURATION, 1);
+    let isVisible = true;
+    let lastBlinkTime = START_TIME;
 
-                const opacity = 1 - progress;
-                cursor.style.opacity = opacity.toString();
+    function animate() {
+        const currentTime = Date.now();
+        const elapsedTime = currentTime - START_TIME;
+        const progress = Math.min(elapsedTime / DURATION, 1);
 
-                const currentBlinkInterval = INITIAL_BLINK_INTERVAL +
-                    (FINAL_BLINK_INTERVAL - INITIAL_BLINK_INTERVAL) * progress;
+        const opacity = 1 - progress;
+        cursor.style.opacity = opacity.toString();
 
-                if (currentTime - lastBlinkTime > currentBlinkInterval) {
-                    isVisible = !isVisible;
-                    cursor.style.visibility = isVisible ? "visible" : "hidden";
-                    lastBlinkTime = currentTime;
-                }
+        const currentBlinkInterval = INITIAL_BLINK_INTERVAL +
+            (FINAL_BLINK_INTERVAL - INITIAL_BLINK_INTERVAL) * progress;
 
-                if (progress < 1) {
-                    requestAnimationFrame(animate);
-                } else {
-                    cursorWrapper.style.display = "none";
-                }
-            }
-            requestAnimationFrame(animate);
+        if (currentTime - lastBlinkTime > currentBlinkInterval) {
+            isVisible = !isVisible;
+            cursor.style.visibility = isVisible ? "visible" : "hidden";
+            lastBlinkTime = currentTime;
         }
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            cursorWrapper.style.display = "none";
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
 
         function showCursorAfterDelay() {
             document.getElementById("titleOverlay").style.display = "block";
@@ -291,7 +298,6 @@ showCursorAfterDelay();
             cursorWrapper.id = "cursorWrapper";
             cursorWrapper.innerHTML = "<span class='blink'>█</span>";
             cursorWrapper.style.position = "relative";
-            cursorWrapper.style.top = "-75px";
             document.body.appendChild(cursorWrapper);
 
             setTimeout(() => {
