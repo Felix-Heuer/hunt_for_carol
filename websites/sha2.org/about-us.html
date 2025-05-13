@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story | SHA2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      /*overflow-x: hidden;*/
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+    }
+
+    #network-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+    }
+nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #0a2463;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 80px;
+    }
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 80px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0a2463;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #3e92cc;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cta-container {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #0a2463;
+      background: transparent;
+      color: #0a2463;
+    }
+
+    .btn-primary {
+      background: #0a2463;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: rgba(10, 36, 99, 0.05);
+    }
+
+    .page-title {
+      position: relative;
+      z-index: 1;
+      background: #0a2463;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .page-title p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #b3c5ef;
+    }
+
+    .story-section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+    }
+
+    .story-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .story-content h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #0a2463;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .story-content p {
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 4rem 0;
+      margin-top: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: #e2e8f0;
+    }
+
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      background: white;
+      border-radius: 8px;
+      /*overflow: hidden;*/
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f0f0f0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-item:nth-child(even) {
+      align-self: flex-end;
+      margin-left: auto;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #3e92cc;
+      transform: translateY(-50%);
+    }
+
+    .timeline-item:nth-child(odd)::before {
+      right: -10px;
+    }
+
+    .timeline-item:nth-child(even)::before {
+      left: -10px;
+    }
+
+    .timeline-item-content {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .timeline-item-content h3 {
+      font-size: 1.25rem;
+      color: #0a2463;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-item-content p {
+      color: #4a5568;
+      font-size: 1rem;
+    }
+
+    footer {
+      background: #0a2463;
+      color: #ffffff;
+      padding: 4rem 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li a {
+      color: #b3c5ef;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #b3c5ef;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0a2463;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 100;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: #143a8c;
+    }
+
+    @media (max-width: 1024px) {
+      header {
+        padding: 1.2rem 2rem;
+      }
+
+      .timeline-item {
+        width: 100%;
+        margin-left: 0;
+        padding: 1rem;
+      }
+
+      .timeline::before {
+        left: 20px;
+      }
+
+      .timeline-item::before {
+        left: 10px;
+      }
+
+      .timeline-item:nth-child(even) {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .page-title h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network-canvas"></canvas>
+
+<header>
+    <div class="logo-container">
+      <div class="logo"><a href="./index.html">SHA<span>2</span></a></div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="./solutions.html">Solutions</a></li>
+        <li><a href="./about-us.html">About Us</a></li>
+        <li><a href="./leadership.html">Leadership</a></li>
+        <li><a href="./career.html">Careers</a></li>
+      </ul>
+    </nav>
+
+    <div class="cta-container">
+      <a href="./customer-portal.html">
+      <button class="btn btn-outline">Client Portal</button>
+      </a>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1>Our Story</h1>
+    <p>A journey of innovation, trust, and cybersecurity excellence</p>
+  </div>
+
+  <section class="story-section">
+    <div class="story-content">
+      <h2>Founding Our Vision</h2>
+      <p>At SHA2, we’re built on a simple truth: trust is the foundation of security.
+
+(Re)named after the trusted SHA-2 cryptographic hash function — the invisible shield behind countless secure digital interactions — we strive to be invisible yet indispensable, just like the technology that inspired us.
+
+Our mission is clear: combine deep technical expertise with bold, proactive strategies to protect not just data, but futures. Cybersecurity isn’t just about defense — it’s about confidence, resilience, and growth.
+
+With backgrounds in cryptography, network security, and risk management, our founders united around a single goal: secure tomorrow, today.
+
+SHA2 is more than a name. It’s a philosophy:
+
+    Resilience through design
+
+    Integrity in action
+
+    Relentless commitment to trust
+
+When you choose SHA2, you’re not just defending systems. You’re building a secure future.</p>
+
+
+      <p>SHA2 was born from a singular mission: to transform cybersecurity from a reactive necessity to a proactive strategic advantage. Founded by a team of seasoned cybersecurity experts, we recognized that traditional security models were becoming obsolete in an increasingly complex digital landscape.</p>
+
+      <p>Our founders came from diverse backgrounds—veterans of military cybersecurity, pioneering technologists, and enterprise security leaders—united by a common belief that security should be intelligent, adaptive, and seamlessly integrated into organizational DNA.</p>
+
+      <div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>1995: The Founding of Pillarstone</h3>
+      <p>Established by a team of cryptographers and network engineers, Pillarstone Security began as a consultancy focused on risk assessments and firewall configurations for early enterprise networks.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>1999: First Breakthrough – PKI Integration</h3>
+      <p>Pillarstone launched its first proprietary product: a Public Key Infrastructure (PKI) toolkit that helped financial institutions securely authenticate users across distributed systems.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>2003: Rebranding to SHA2.org</h3>
+      <p>Reflecting a deeper commitment to cryptographic integrity and a broader product vision, Pillarstone Security officially rebranded as SHA2.org — a nod to the widely trusted SHA-2 hash function family.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>2007: Launch of Sentinel Platform</h3>
+      <p>SHA2 introduced Sentinel, a real-time intrusion detection and incident response platform tailored for healthcare and critical infrastructure sectors.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>2012: Cloud-First Strategy</h3>
+      <p>With the rise of cloud computing, SHA2 pivoted to offer zero-trust architecture consulting and launched its first cloud-native security monitoring tools.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>2016: Threat Intelligence Division Formed</h3>
+      <p>Recognizing the need for proactive defense, SHA2 launched its Threat Intelligence Division to track global attack patterns and build predictive analytics into client-facing tools.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>2020: Secure Tomorrow - Today Initiative</h3>
+      <p>SHA2 launched the “Secure Tomorrow - Today” initiative, focusing on partnerships with educational institutions and ethical hacking communities to build a more secure digital future.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>2024: Quantum-Ready Cryptography</h3>
+      <p>In anticipation of the post-quantum era, SHA2 rolled out its first suite of quantum-resistant encryption tools, becoming a leader in next-generation cryptographic standards.</p>
+    </div>
+  </div>
+</div>
+
+  <div class="timeline-item">
+    <div class="timeline-item-content">
+      <h3>2024: Quantum-Ready Cryptography</h3>
+      <p>FDSJKFJDLKÖJEOIFEOIFHJEIFHIEHFIEFHP)IFHPEHF=OIHEIHF)IEFHPFHFH)IHFIHEJIFOEDJHE</p>
+    </div>
+  </div>
+</div>
+
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-item-content">
+            <h3>2012: The Genesis</h3>
+            <p>Our story begins with a small team of cybersecurity researchers identifying critical gaps in enterprise protection strategies. What started as collaborative research quickly evolved into a vision for a new approach to digital security.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-item-content">
+            <h3>2015: First Major Innovation</h3>
+            <p>Developed our first proprietary threat intelligence platform, combining machine learning with human expertise to predict and prevent advanced cyber threats before they could penetrate enterprise networks.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-item-content">
+            <h3>2018: Scaling Our Impact</h3>
+            <p>Expanded our solutions to cover comprehensive security ecosystems, including cloud, network, and identity protection. Established partnerships with leading global technology providers to enhance our security capabilities.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-item-content">
+            <h3>2021: Zero Trust Revolution</h3>
+            <p>Pioneered our Zero Trust architecture, reimagining security as a continuous verification process rather than a static perimeter. This approach has since become a benchmark in the cybersecurity industry.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-item-content">
+            <h3>2024: Global Recognition</h3>
+            <p>Named a leading cybersecurity innovator by multiple international technology and security publications. Protecting enterprises across six continents with our cutting-edge security solutions.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>Today, SHA2 continues to push the boundaries of what's possible in cybersecurity. We're not just protecting networks; we're empowering organizations to innovate with confidence, knowing their digital assets are comprehensively secured.</p>
+
+      <p>Our commitment remains unchanged: to be at the forefront of cybersecurity innovation, turning potential vulnerabilities into strategic strengths for our clients.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <div class="logo" style="color: white; margin-bottom: 1rem;">SHA<span>2</span></div>
+        <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Protecting Tomorrow - Today.</p>
+
+      </div>
+
+      <div class="footer-col">
+        <h4>Solutions</h4>
+          <ul>
+            <li><a href="./solutions.html#threat-protection">Threat Protection</a></li>
+            <li><a href="./solutions.html#data-security">Data Security</a></li>
+            <li><a href="./solutions.html#cloud-security">Cloud Security</a></li>
+            <li><a href="./solutions.html#identity-management">Identity Management</a></li>
+            <li><a href="./solutions.html#network-security">Network Security</a></li>
+          </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+          <ul>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./leadership.html">Leadership</a></li>
+            <li><a href="./career.html">Careers</a></li>
+            <li><a href="./imprint.html">Imprint</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © <span id="year"></span> SHA2: Protecting Tomorrow - Today. All rights reserved.
+    </div>
+  </footer>
+
+  <div class="scroll-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Canvas animation (same as main page)
+  const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, points;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    generatePoints();
+  }
+
+  function generatePoints() {
+    const density = 4000; // Adjust density: lower = more points
+    const numPoints = Math.floor((width * height) / density);
+    points = [];
+    for (let i = 0; i < numPoints; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        colorProgress: i < numPoints / 2 ? 0 : 1 // Half blue, half red
+      });
+    }
+    shuffle(points); // Shuffle to mix red/blue positions
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function lerpColor(a, b, t) {
+    const r = Math.round(a[0] + (b[0] - a[0]) * t);
+    const g = Math.round(a[1] + (b[1] - a[1]) * t);
+    const b_ = Math.round(a[2] + (b[2] - a[2]) * t);
+    return `rgb(${r},${g},${b_})`;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Move points
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x <= 0 || p.x >= width) p.vx *= -1;
+      if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = lerpColor([59, 130, 246], [239, 68, 68], p.colorProgress); // Blue to Red
+      ctx.fill();
+    }
+
+    // Analyze connections
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      let blueConnections = 0;
+      let redConnections = 0;
+
+      for (let j = 0; j < points.length; j++) {
+        if (i === j) continue;
+        const q = points[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          // Draw connection
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          const midProgress = (p.colorProgress + q.colorProgress) / 2;
+          ctx.strokeStyle = lerpColor([59, 130, 246], [239, 68, 68], midProgress);
+          ctx.globalAlpha = 1 - dist / 120;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+
+          // Count neighbor colors
+          if (q.colorProgress < 0.5) {
+            blueConnections++;
+          } else {
+            redConnections++;
+          }
+        }
+      }
+
+      // Gradually adjust colorProgress based on neighbor influence
+      if (blueConnections > redConnections) {
+        p.colorProgress = Math.max(0, p.colorProgress - 0.002); // move toward blue
+      } else if (redConnections > blueConnections) {
+        p.colorProgress = Math.min(1, p.colorProgress + 0.002); // move toward red
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  // Scroll to top button
+  const scrollTopBtn = document.querySelector('.scroll-top');
+
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>

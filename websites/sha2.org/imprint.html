@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imprint | SHA2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      height: auto;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+    }
+
+    #network-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #0a2463;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 80px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0a2463;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #3e92cc;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cta-container {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #0a2463;
+      background: transparent;
+      color: #0a2463;
+    }
+
+    .btn-primary {
+      background: #0a2463;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: rgba(10, 36, 99, 0.05);
+    }
+
+    .page-title {
+      position: relative;
+      z-index: 1;
+      background: #0a2463;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .page-title p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #b3c5ef;
+    }
+
+    .page-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .imprint-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .imprint-section h2 {
+      font-size: 1.5rem;
+      color: #0a2463;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #3e92cc;
+    }
+
+    .imprint-section h3 {
+      font-size: 1.25rem;
+      color: #0a2463;
+      margin: 1.5rem 0 1rem;
+    }
+
+    .imprint-section p, .imprint-section address {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+      color: #4a5568;
+    }
+
+    .imprint-section a {
+      color: #3e92cc;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .imprint-section a:hover {
+      color: #0a2463;
+      text-decoration: underline;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid #3e92cc;
+    }
+
+    .contact-item h4 {
+      font-size: 1.1rem;
+      color: #0a2463;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-item p {
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-icon {
+      color: #3e92cc;
+    }
+
+    footer {
+      background: #0a2463;
+      color: #ffffff;
+      padding: 4rem 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li a {
+      color: #b3c5ef;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #b3c5ef;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0a2463;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 100;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: #143a8c;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      header {
+        padding: 1.2rem 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .page-title h1 {
+        font-size: 2.5rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network-canvas"></canvas>
+
+  <header>
+    <div class="logo-container">
+      <div class="logo"><a href="./index.html">SHA<span>2</span></a></div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="./solutions.html">Solutions</a></li>
+        <li><a href="./about-us.html">About Us</a></li>
+        <li><a href="./leadership.html">Leadership</a></li>
+        <li><a href="./career.html">Careers</a></li>
+      </ul>
+    </nav>
+
+    <div class="cta-container">
+      <a href="./customer-portal.html">
+      <button class="btn btn-outline">Client Portal</button>
+      </a>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1>Imprint</h1>
+    <p>Legal information about SHA2 Enterprise Security Solutions</p>
+  </div>
+
+  <div class="page-content">
+    <div class="imprint-section">
+      <h2>Company Information</h2>
+      <p><strong>SHA2 Enterprise Security Solutions Inc.</strong></p>
+      <address>
+        123 Cyber Security Drive<br>
+        Suite 400<br>
+        San Francisco, CA 94105<br>
+        United States
+      </address>
+
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h4><i class="fas fa-phone-alt contact-icon"></i> Phone</h4>
+          <p>Main: +1 (415) 555-0123</p>
+          <p>Support: +1 (415) 555-0199</p>
+        </div>
+
+        <div class="contact-item">
+          <h4><i class="fas fa-envelope contact-icon"></i> Email</h4>
+          <p>General Inquiries: <a href="mailto:info@sha2security.com">info@sha2security.com</a></p>
+          <p>Support: <a href="mailto:support@sha2security.com">support@sha2security.com</a></p>
+        </div>
+
+        <div class="contact-item">
+          <h4><i class="fas fa-globe contact-icon"></i> Web</h4>
+          <p>Website: <a href="https://www.sha2security.com">www.sha2security.com</a></p>
+          <p>Support Portal: <a href="https://support.sha2security.com">support.sha2security.com</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="imprint-section">
+      <h2>Legal Details</h2>
+      <p><strong>Commercial Register:</strong> Delaware Corporation File Number: 5555555</p>
+      <p><strong>VAT Identification Number:</strong> US 123456789</p>
+      <p><strong>Tax ID:</strong> 12-3456789</p>
+      <p><strong>Responsible for content according to § 55 Abs. 2 RStV:</strong> [CEO NAME], CEO</p>
+      <p><strong>Data Protection Officer:</strong> [DPO NAME], <a href="mailto:privacy@sha2security.com">privacy@sha2security.com</a></p>
+    </div>
+
+    <div class="imprint-section">
+      <h2>Management Board</h2>
+      <p><strong>[CEO NAME]</strong> - Chief Executive Officer & Co-Founder</p>
+      <p><strong>[CTO NAME]</strong> - Chief Technology Officer & Co-Founder</p>
+      <p><strong>[COO NAME]</strong> - Chief Operating Officer</p>
+    </div>
+
+    <div class="imprint-section">
+      <h2>Regulatory Information</h2>
+      <h3>Dispute Resolution</h3>
+      <p>The European Commission provides a platform for online dispute resolution (OS): <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a></p>
+      <p>We are not obliged and not willing to participate in dispute settlement proceedings before a consumer arbitration board.</p>
+
+      <h3>Liability for Content</h3>
+      <p>The contents of our pages have been created with the utmost care. However, we cannot guarantee the accuracy, completeness, and timeliness of the content. As a service provider, we are responsible for our own content on these pages according to § 7 Abs.1 TMG (German Telemedia Act). According to §§ 8 to 10 TMG, however, we are not obligated to monitor transmitted or stored information from third parties or to investigate circumstances that indicate illegal activity.</p>
+
+      <h3>Liability for Links</h3>
+      <p>Our website contains links to external third-party websites, the content of which we have no influence over. Therefore, we cannot assume any liability for this external content. The respective provider or operator of the linked pages is always responsible for the content of the linked pages.</p>
+    </div>
+
+    <div class="imprint-section">
+      <h2>Copyright Information</h2>
+      <p>The content and works created by the site operators on these pages are subject to copyright law. Duplication, processing, distribution, and any kind of exploitation outside the limits of copyright law require the written consent of the respective author or creator.</p>
+      <p>© 2025 SHA2 Enterprise Security Solutions Inc. All rights reserved.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <div class="logo" style="color: white; margin-bottom: 1rem;">SHA<span>2</span></div>
+        <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Protecting Tomorrow - Today.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Solutions</h4>
+          <ul>
+            <li><a href="./solutions.html#threat-protection">Threat Protection</a></li>
+            <li><a href="./solutions.html#data-security">Data Security</a></li>
+            <li><a href="./solutions.html#cloud-security">Cloud Security</a></li>
+            <li><a href="./solutions.html#identity-management">Identity Management</a></li>
+            <li><a href="./solutions.html#network-security">Network Security</a></li>
+          </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+          <ul>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./leadership.html">Leadership</a></li>
+            <li><a href="./career.html">Careers</a></li>
+            <li><a href="./imprint.html">Imprint</a></li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © <span id="year">2025</span> SHA2: Protecting Tomorrow - Today. All rights reserved.
+    </div>
+  </footer>
+
+  <div class="scroll-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <script>
+    // Dynamic year display
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Canvas animation (enhanced color-transition animation)
+    const canvas = document.getElementById('network-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, points;
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      generatePoints();
+    }
+
+    function generatePoints() {
+      const density = 4000;
+      const numPoints = Math.floor((width * height) / density);
+      points = [];
+      for (let i = 0; i < numPoints; i++) {
+        points.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          colorProgress: i < numPoints / 2 ? 0 : 1 // Half blue, half red
+        });
+      }
+      shuffle(points);
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function lerpColor(a, b, t) {
+      const r = Math.round(a[0] + (b[0] - a[0]) * t);
+      const g = Math.round(a[1] + (b[1] - a[1]) * t);
+      const b_ = Math.round(a[2] + (b[2] - a[2]) * t);
+      return `rgb(${r},${g},${b_})`;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x <= 0 || p.x >= width) p.vx *= -1;
+        if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = lerpColor([59, 130, 246], [239, 68, 68], p.colorProgress); // blue to red
+        ctx.fill();
+      }
+
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        let blueConnections = 0;
+        let redConnections = 0;
+
+        for (let j = 0; j < points.length; j++) {
+          if (i === j) continue;
+          const q = points[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            const midProgress = (p.colorProgress + q.colorProgress) / 2;
+            ctx.strokeStyle = lerpColor([59, 130, 246], [239, 68, 68], midProgress);
+            ctx.globalAlpha = 1 - dist / 120;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+            ctx.globalAlpha = 1;
+
+            if (q.colorProgress < 0.5) {
+              blueConnections++;
+            } else {
+              redConnections++;
+            }
+          }
+        }
+
+        if (blueConnections > redConnections) {
+          p.colorProgress = Math.max(0, p.colorProgress - 0.002);
+        } else if (redConnections > blueConnections) {
+          p.colorProgress = Math.min(1, p.colorProgress + 0.002);
+        }
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    // Scroll to top button logic
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    if (scrollTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      });
+
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  </script>
+</body>
+</html>

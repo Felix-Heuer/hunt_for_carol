@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers | SHA2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      height: auto;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      /*overflow-x: hidden;*/
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+    }
+
+    #network-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+    }
+
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 80px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0a2463;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #3e92cc;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+    }
+nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #0a2463;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+    .cta-container {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #0a2463;
+      background: transparent;
+      color: #0a2463;
+    }
+
+    .btn-primary {
+      background: #0a2463;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: rgba(10, 36, 99, 0.05);
+    }
+
+    .page-title {
+      position: relative;
+      z-index: 1;
+      background: #0a2463;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .page-title p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #b3c5ef;
+    }
+
+    .page-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .job-categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .category-btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: white;
+      color: #4a5568;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .category-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.1);
+    }
+
+    .category-btn.active {
+      background: #0a2463;
+      color: white;
+      border-color: #0a2463;
+    }
+
+    .jobs-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f0f0f0;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .job-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .job-header {
+      background: linear-gradient(135deg, #0a2463, #3e92cc);
+      color: white;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .job-header h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .job-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .job-meta div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .job-body {
+      padding: 1.5rem;
+    }
+
+    .job-highlights {
+      margin-bottom: 1.5rem;
+    }
+
+    .job-highlights h4 {
+      font-size: 1.1rem;
+      color: #0a2463;
+      margin-bottom: 0.75rem;
+    }
+
+    .job-highlights ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .job-highlights ul li {
+      margin-bottom: 0.5rem;
+      color: #4a5568;
+    }
+
+    .salary-range {
+      background: rgba(62, 146, 204, 0.1);
+      color: #0a2463;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    .job-description {
+      margin-bottom: 1.5rem;
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    .job-btn-container {
+      text-align: center;
+      padding-bottom: 1.5rem;
+    }
+
+    .apply-btn {
+      background: #3e92cc;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .apply-btn:hover {
+      background: #2d7cb9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(62, 146, 204, 0.2);
+    }
+
+    .application-form-section {
+      background: #f0f5ff;
+      border-radius: 8px;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .application-form-section h2 {
+      text-align: center;
+      color: #0a2463;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .application-form {
+      max-width: 650px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #4a5568;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: #3e92cc;
+      box-shadow: 0 0 0 3px rgba(62, 146, 204, 0.1);
+    }
+
+    .form-submit {
+      background: #0a2463;
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-submit:hover {
+      background: #143a8c;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.2);
+    }
+
+    footer {
+      background: #0a2463;
+      color: #ffffff;
+      padding: 4rem 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li a {
+      color: #b3c5ef;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #b3c5ef;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0a2463;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 100;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: #143a8c;
+    }
+
+    .job-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    @media (max-width: 1024px) {
+      header {
+        padding: 1.2rem 2rem;
+      }
+
+      .jobs-container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .page-title h1 {
+        font-size: 2.5rem;
+      }
+
+      .job-categories {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .jobs-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network-canvas"></canvas>
+
+<header>
+    <div class="logo-container">
+      <div class="logo"><a href="./index.html">SHA<span>2</span></a></div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="./solutions.html">Solutions</a></li>
+        <li><a href="./about-us.html">About Us</a></li>
+        <li><a href="./leadership.html">Leadership</a></li>
+        <li><a href="./career.html">Careers</a></li>
+      </ul>
+    </nav>
+
+    <div class="cta-container">
+      <a href="./customer-portal.html">
+      <button class="btn btn-outline">Client Portal</button>
+      </a>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1>Join Our Team</h1>
+    <p>Build the future of enterprise security with industry leaders</p>
+  </div>
+
+  <div class="page-content">
+    <div class="job-categories">
+      <button class="category-btn active" data-category="all">All Positions</button>
+      <button class="category-btn" data-category="engineering">Engineering</button>
+      <button class="category-btn" data-category="security">Security</button>
+      <button class="category-btn" data-category="data">Data Science</button>
+      <button class="category-btn" data-category="product">Product</button>
+      <button class="category-btn" data-category="business">Business</button>
+    </div>
+
+    <div class="jobs-container">
+      <!-- Cybersecurity Engineer -->
+      <div class="job-card" data-category="engineering security">
+        <div class="job-header">
+          <span class="job-tag">Engineering</span>
+          <span class="job-tag">Security</span>
+          <h3>Senior Cybersecurity Engineer</h3>
+          <div class="job-meta">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>San Francisco, CA (Hybrid)</span>
+            </div>
+            <div>
+              <i class="fas fa-briefcase"></i>
+              <span>Full-time</span>
+            </div>
+          </div>
+        </div>
+        <div class="job-body">
+          <div class="job-highlights">
+            <h4>Role Overview</h4>
+            <p class="job-description">
+              As a Senior Cybersecurity Engineer at SHA2, you'll be responsible for designing and implementing security solutions that protect our clients' most sensitive information and infrastructure from sophisticated threats.
+            </p>
+            <h4>Key Responsibilities</h4>
+            <ul>
+              <li>Architect and implement comprehensive security solutions for enterprise clients</li>
+              <li>Conduct vulnerability assessments and penetration testing</li>
+              <li>Develop and maintain security standards, best practices, and procedures</li>
+              <li>Lead incident response for high-severity security events</li>
+              <li>Mentor junior security engineers and collaborate with cross-functional teams</li>
+            </ul>
+            <h4>Requirements</h4>
+            <ul>
+              <li>Bachelor's degree in Computer Science or related field</li>
+              <li>5+ years of experience in cybersecurity engineering</li>
+              <li>Strong knowledge of network security, cloud security, and encryption</li>
+              <li>Relevant certifications (CISSP, CEH, OSCP) preferred</li>
+              <li>Experience with SIEM tools and security automation</li>
+            </ul>
+          </div>
+          <div class="salary-range">
+            <i class="fas fa-dollar-sign"></i>
+            Salary Range: $140,000 - $180,000 / year
+          </div>
+          <div class="job-btn-container">
+            <button class="apply-btn" data-job="Senior Cybersecurity Engineer">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud Security Architect -->
+      <div class="job-card" data-category="engineering security">
+        <div class="job-header">
+          <span class="job-tag">Engineering</span>
+          <span class="job-tag">Security</span>
+          <h3>Cloud Security Architect</h3>
+          <div class="job-meta">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Remote (US)</span>
+            </div>
+            <div>
+              <i class="fas fa-briefcase"></i>
+              <span>Full-time</span>
+            </div>
+          </div>
+        </div>
+        <div class="job-body">
+          <div class="job-highlights">
+            <h4>Role Overview</h4>
+            <p class="job-description">
+              We're looking for a Cloud Security Architect to design and implement secure cloud infrastructure solutions for our enterprise clients across AWS, Azure, and GCP environments.
+            </p>
+            <h4>Key Responsibilities</h4>
+            <ul>
+              <li>Design secure multi-cloud architectures using security best practices</li>
+              <li>Implement DevSecOps practices for cloud deployments</li>
+              <li>Develop cloud security policies, procedures, and architectural patterns</li>
+              <li>Evaluate cloud security tools and services</li>
+              <li>Work with clients to understand requirements and provide solutions</li>
+            </ul>
+            <h4>Requirements</h4>
+            <ul>
+              <li>8+ years of experience in IT with 4+ years in cloud security</li>
+              <li>Strong experience with AWS, Azure, and/or GCP security services</li>
+              <li>Expertise in IaC (Terraform, CloudFormation)</li>
+              <li>Cloud certifications (AWS, Azure, GCP)</li>
+              <li>Excellent communication and consultative skills</li>
+            </ul>
+          </div>
+          <div class="salary-range">
+            <i class="fas fa-dollar-sign"></i>
+            Salary Range: $160,000 - $195,000 / year
+          </div>
+          <div class="job-btn-container">
+            <button class="apply-btn" data-job="Cloud Security Architect">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Threat Intelligence Analyst -->
+      <div class="job-card" data-category="security">
+        <div class="job-header">
+          <span class="job-tag">Security</span>
+          <h3>Threat Intelligence Analyst</h3>
+          <div class="job-meta">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Boston, MA (Hybrid)</span>
+            </div>
+            <div>
+              <i class="fas fa-briefcase"></i>
+              <span>Full-time</span>
+            </div>
+          </div>
+        </div>
+        <div class="job-body">
+          <div class="job-highlights">
+            <h4>Role Overview</h4>
+            <p class="job-description">
+              Join our Security Operations Center to analyze, identify, and mitigate emerging threats to our clients' environments through advanced threat intelligence and analysis.
+            </p>
+            <h4>Key Responsibilities</h4>
+            <ul>
+              <li>Monitor and analyze threat intelligence feeds and reports</li>
+              <li>Conduct research on emerging threat actors and attack methods</li>
+              <li>Create actionable threat intelligence reports for internal teams and clients</li>
+              <li>Develop and implement processes to improve threat detection capabilities</li>
+              <li>Collaborate with incident response teams during security events</li>
+            </ul>
+            <h4>Requirements</h4>
+            <ul>
+              <li>3+ years of experience in threat intelligence or security analysis</li>
+              <li>Strong analytical skills and attention to detail</li>
+              <li>Knowledge of APTs, malware analysis, and cyber attack methodologies</li>
+              <li>Experience with SIEM platforms, threat intelligence platforms, and OSINT tools</li>
+              <li>Relevant certifications (GCTI, GCIA, SANS) preferred</li>
+            </ul>
+          </div>
+          <div class="salary-range">
+            <i class="fas fa-dollar-sign"></i>
+            Salary Range: $110,000 - $140,000 / year
+          </div>
+          <div class="job-btn-container">
+            <button class="apply-btn" data-job="Threat Intelligence Analyst">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Scientist -->
+      <div class="job-card" data-category="data security">
+        <div class="job-header">
+          <span class="job-tag">Data Science</span>
+          <span class="job-tag">Security</span>
+          <h3>Security Data Scientist</h3>
+          <div class="job-meta">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Austin, TX (Hybrid)</span>
+            </div>
+            <div>
+              <i class="fas fa-briefcase"></i>
+              <span>Full-time</span>
+            </div>
+          </div>
+        </div>
+        <div class="job-body">
+          <div class="job-highlights">
+            <h4>Role Overview</h4>
+            <p class="job-description">
+              Apply data science and machine learning techniques to enhance our threat detection capabilities and develop innovative security analytics solutions for our enterprise security platform.
+            </p>
+            <h4>Key Responsibilities</h4>
+            <ul>
+              <li>Develop machine learning models for anomaly detection and threat prediction</li>
+              <li>Analyze large security datasets to identify patterns and insights</li>
+              <li>Create algorithms to automate threat hunting processes</li>
+              <li>Design and implement data pipelines for security telemetry</li>
+              <li>Collaborate with engineering teams to integrate ML models into production</li>
+            </ul>
+            <h4>Requirements</h4>
+            <ul>
+              <li>MS or PhD in Computer Science, Data Science, or related field</li>
+              <li>3+ years of experience in data science or machine learning</li>
+              <li>Experience with Python, R, and data science libraries</li>
+              <li>Knowledge of big data technologies (Spark, Hadoop)</li>
+              <li>Understanding of cybersecurity concepts and attack vectors</li>
+            </ul>
+          </div>
+          <div class="salary-range">
+            <i class="fas fa-dollar-sign"></i>
+            Salary Range: $130,000 - $170,000 / year
+          </div>
+          <div class="job-btn-container">
+            <button class="apply-btn" data-job="Security Data Scientist">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Manager -->
+      <div class="job-card" data-category="product">
+        <div class="job-header">
+          <span class="job-tag">Product</span>
+          <h3>Senior Product Manager, Identity Solutions</h3>
+          <div class="job-meta">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Seattle, WA (Hybrid)</span>
+            </div>
+            <div>
+              <i class="fas fa-briefcase"></i>
+              <span>Full-time</span>
+            </div>
+          </div>
+        </div>
+        <div class="job-body">
+          <div class="job-highlights">
+            <h4>Role Overview</h4>
+            <p class="job-description">
+              Lead the product vision and strategy for our Identity Management solutions, driving innovation and ensuring our products meet the evolving needs of enterprise customers.
+            </p>
+            <h4>Key Responsibilities</h4>
+            <ul>
+              <li>Define product vision, strategy, and roadmap for Identity solutions</li>
+              <li>Gather and prioritize requirements from customers and internal stakeholders</li>
+              <li>Work closely with engineering and design to deliver exceptional products</li>
+              <li>Analyze market trends and competitive landscape</li>
+              <li>Drive product launches and go-to-market strategies</li>
+            </ul>
+            <h4>Requirements</h4>
+            <ul>
+              <li>5+ years of product management experience</li>
+              <li>Experience with identity and access management solutions</li>
+              <li>Strong understanding of enterprise security requirements</li>
+              <li>Excellent analytical, communication, and leadership skills</li>
+              <li>Technical background preferred</li>
+            </ul>
+          </div>
+          <div class="salary-range">
+            <i class="fas fa-dollar-sign"></i>
+            Salary Range: $145,000 - $185,000 / year
+          </div>
+          <div class="job-btn-container">
+            <button class="apply-btn" data-job="Senior Product Manager, Identity Solutions">Apply Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Engineer -->
+      <div class="job-card" data-category="business security">
+        <div class="job-header">
+          <span class="job-tag">Business</span>
+          <span class="job-tag">Security</span>
+          <h3>Enterprise Security Sales Engineer</h3>
+          <div class="job-meta">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Chicago, IL (Hybrid)</span>
+            </div>
+            <div>
+              <i class="fas fa-briefcase"></i>
+              <span>Full-time</span>
+            </div>
+          </div>
+        </div>
+        <div class="job-body">
+          <div class="job-highlights">
+            <h4>Role Overview</h4>
+            <p class="job-description">
+              Bridge the gap between our sales and technical teams by providing deep technical expertise on our security solutions to enterprise prospects and customers throughout the sales cycle.
+            </p>
+            <h4>Key Responsibilities</h4>
+            <ul>
+              <li>Conduct technical presentations, demonstrations, and proof of concepts</li>
+              <li>Design and document solution architectures for prospects</li>
+              <li>Collaborate with sales teams to develop account strategies</li>
+              <li>Provide technical guidance on product capabilities and integrations</li>
+              <li>Stay current on industry trends and competitive offerings</li>
+            </ul>
+            <h4>Requirements</h4>
+            <ul>
+              <li>5+ years of experience in security sales engineering or solution architecture</li>
+              <li>Strong technical knowledge of enterprise security solutions</li>
+              <li>Excellent presentation and communication skills</li>
+              <li>Experience with enterprise sales processes</li>
+              <li>Security certifications preferred</li>
+            </ul>
+          </div>
+          <div class="salary-range">
+            <i class="fas fa-dollar-sign"></i>
+            Salary Range: $135,000 - $175,000 / year + Commission
+          </div>
+          <div class="job-btn-container">
+            <button class="apply-btn" data-job="Enterprise Security Sales Engineer">Apply Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="application-form" class="application-form-section">
+      <h2>Apply for a Position</h2>
+      <form class="application-form" id="job-application-form">
+        <div class="form-group">
+          <label for="job-title">Position</label>
+          <input type="text" id="job-title" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+          <label for="full-name">Full Name *</label>
+          <input type="text" id="full-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="linkedin">LinkedIn Profile URL</label>
+          <input type="url" id="linkedin" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="message">Cover Letter / Additional Information</label>
+          <textarea id="message" class="form-control" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="resume">Resume/CV (Coming Soon)</label>
+          <input type="file" id="resume" class="form-control" disabled>
+          <small style="display: block; margin-top: 0.5rem; color: #718096;">Attachment functionality will be available soon. Please include your resume link in your additional information.</small>
+        </div>
+        <button type="submit" class="form-submit">Submit Application</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="logo" style="color: white; margin-bottom: 1rem;">SHA<span>2</span></div>
+          <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Protecting Tomorrow - Today.</p>
+
+        </div>
+
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="./solutions.html#threat-protection">Threat Protection</a></li>
+            <li><a href="./solutions.html#data-security">Data Security</a></li>
+            <li><a href="./solutions.html#cloud-security">Cloud Security</a></li>
+            <li><a href="./solutions.html#identity-management">Identity Management</a></li>
+            <li><a href="./solutions.html#network-security">Network Security</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./leadership.html">Leadership</a></li>
+            <li><a href="./career.html">Careers</a></li>
+            <li><a href="./imprint.html">Imprint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> SHA2: Protecting Tomorrow - Today. All rights reserved.
+      </div>
+    </footer>
+
+  <script>
+    // Network canvas visualization
+    const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, points;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    generatePoints();
+  }
+
+  function generatePoints() {
+    const density = 4000;
+    const numPoints = Math.floor((width * height) / density);
+    points = [];
+    for (let i = 0; i < numPoints; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        colorProgress: i < numPoints / 2 ? 0 : 1 // Half blue, half red
+      });
+    }
+    shuffle(points);
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function lerpColor(a, b, t) {
+    const r = Math.round(a[0] + (b[0] - a[0]) * t);
+    const g = Math.round(a[1] + (b[1] - a[1]) * t);
+    const b_ = Math.round(a[2] + (b[2] - a[2]) * t);
+    return `rgb(${r},${g},${b_})`;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x <= 0 || p.x >= width) p.vx *= -1;
+      if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = lerpColor([59, 130, 246], [239, 68, 68], p.colorProgress); // blue to red
+      ctx.fill();
+    }
+
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      let blueConnections = 0;
+      let redConnections = 0;
+
+      for (let j = 0; j < points.length; j++) {
+        if (i === j) continue;
+        const q = points[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          const midProgress = (p.colorProgress + q.colorProgress) / 2;
+          ctx.strokeStyle = lerpColor([59, 130, 246], [239, 68, 68], midProgress);
+          ctx.globalAlpha = 1 - dist / 120;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+
+          if (q.colorProgress < 0.5) {
+            blueConnections++;
+          } else {
+            redConnections++;
+          }
+        }
+      }
+
+      if (blueConnections > redConnections) {
+        p.colorProgress = Math.max(0, p.colorProgress - 0.002);
+      } else if (redConnections > blueConnections) {
+        p.colorProgress = Math.min(1, p.colorProgress + 0.002);
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+
+    // Job filtering
+    document.addEventListener('DOMContentLoaded', function() {
+      const categoryButtons = document.querySelectorAll('.category-btn');
+      const jobCards = document.querySelectorAll('.job-card');
+
+      categoryButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Update active button
+          categoryButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+
+          const category = this.dataset.category;
+
+          // Filter jobs
+          jobCards.forEach(card => {
+            if (category === 'all' || card.dataset.category.includes(category)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+
+    // Scroll to application form when Apply Now is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+      const applyButtons = document.querySelectorAll('.apply-btn');
+      const applicationForm = document.getElementById('application-form');
+      const jobTitleInput = document.getElementById('job-title');
+
+      applyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const jobTitle = this.dataset.job;
+          jobTitleInput.value = jobTitle;
+
+          applicationForm.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    });
+
+    // Scroll to top button
+    document.addEventListener('DOMContentLoaded', function() {
+      const scrollTopBtn = document.getElementById('scroll-top');
+
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      });
+
+      scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Simple mailto submission
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('job-application-form');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get form values
+        const jobTitle = document.getElementById('job-title').value;
+        const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const linkedin = document.getElementById('linkedin').value;
+        const message = document.getElementById('message').value;
+
+        // Build email content
+        const subject = `Job Application: ${jobTitle}`;
+
+        let body = `Position: ${jobTitle}\n`;
+        body += `Name: ${fullName}\n`;
+        body += `Email: ${email}\n`;
+        body += `Phone: ${phone}\n`;
+        body += `LinkedIn: ${linkedin}\n\n`;
+        body += `${message}`;
+
+        // Create mailto link to careers@sha2.org
+        window.location.href = `mailto:careers@sha2.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+    });
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>

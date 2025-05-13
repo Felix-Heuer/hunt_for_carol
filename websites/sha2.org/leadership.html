@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leadership | SHA2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      height: auto;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      /*overflow-x: hidden;*/
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+    }
+
+    #network-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+    }
+nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #0a2463;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 80px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0a2463;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #3e92cc;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+.solutions-nav {
+  background: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 80px;  /* Adjust based on your header height */
+  z-index: 100;  /* Increased z-index */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.solutions-nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  /* Remove position: sticky here */
+}
+
+    .solutions-nav a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .solutions-nav a:hover {
+      color: #0a2463;
+    }
+
+    .solutions-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    .solutions-nav a:hover::after {
+      width: 100%;
+    }
+    .cta-container {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #0a2463;
+      background: transparent;
+      color: #0a2463;
+    }
+
+    .btn-primary {
+      background: #0a2463;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: rgba(10, 36, 99, 0.05);
+    }
+
+    .page-title {
+      position: relative;
+      z-index: 1;
+      background: #0a2463;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .page-title p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #b3c5ef;
+    }
+
+    .page-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .leadership-intro {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .leadership-intro h2 {
+      font-size: 2rem;
+      color: #0a2463;
+      margin-bottom: 1rem;
+    }
+
+    .leadership-intro p {
+      font-size: 1.1rem;
+      color: #4a5568;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* New leadership grid layout - 4 columns */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .executive-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .executive-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .executive-image {
+      width: 100%;
+      height: 250px;
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .executive-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .executive-info {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .executive-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #0a2463;
+      margin-bottom: 0.5rem;
+    }
+
+    .executive-title {
+      font-size: 0.95rem;
+      color: #3e92cc;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .executive-bio {
+      color: #4a5568;
+      line-height: 1.5;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .executive-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-item {
+      padding: 0.4rem 0.8rem;
+      background: rgba(62, 146, 204, 0.1);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: #0a2463;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    footer {
+      background: #0a2463;
+      color: #ffffff;
+      padding: 4rem 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li a {
+      color: #b3c5ef;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #b3c5ef;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0a2463;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 100;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: #143a8c;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 1200px) {
+      .leadership-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .leadership-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      header {
+        padding: 1.2rem 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .page-title h1 {
+        font-size: 2.5rem;
+      }
+
+      .leadership-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .executive-stats {
+        flex-direction: column;
+      }
+
+      .stat-item {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network-canvas"></canvas>
+
+<header>
+    <div class="logo-container">
+      <div class="logo"><a href="./index.html">SHA<span>2</span></a></div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="./solutions.html">Solutions</a></li>
+        <li><a href="./about-us.html">About Us</a></li>
+        <li><a href="./leadership.html">Leadership</a></li>
+        <li><a href="./career.html">Careers</a></li>
+      </ul>
+    </nav>
+
+    <div class="cta-container">
+      <a href="./customer-portal.html">
+      <button class="btn btn-outline">Client Portal</button>
+      </a>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1>Our Leadership Team</h1>
+    <p>Meet the visionaries driving innovation in enterprise security</p>
+  </div>
+
+  <div class="page-content">
+    <div class="leadership-intro">
+      <h2>Shaping the Future of Cybersecurity</h2>
+      <p>
+        SHA2 is led by a team of industry veterans with decades of combined experience in enterprise security,
+        software development, and business leadership. Our executive team is committed to pushing the boundaries
+        of what's possible in cybersecurity while maintaining the highest standards of integrity and customer success.
+      </p>
+    </div>
+
+    <div class="leadership-grid">
+      <!-- CEO Card -->
+      <div class="executive-card">
+        <div class="executive-image">
+          <img src="C.png" alt="CEO Placeholder" />
+        </div>
+        <div class="executive-info">
+          <h3 class="executive-name">[CEO NAME]</h3>
+          <div class="executive-title">Chief Executive Officer & Co-Founder</div>
+          <p class="executive-bio">
+            A visionary leader with over 20 years of experience in cybersecurity and enterprise software.
+            Before founding SHA2, they held leadership positions at several Fortune 500 companies and led
+            the development of groundbreaking security technologies.
+          </p>
+          <div class="executive-stats">
+            <div class="stat-item">
+              <i class="fas fa-briefcase"></i>
+              <span>20+ Years Experience</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-university"></i>
+              <span>MIT, Computer Science</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTO Card -->
+      <div class="executive-card">
+        <div class="executive-image">
+          <img src="A.png" alt="CTO Placeholder" />
+        </div>
+        <div class="executive-info">
+          <h3 class="executive-name">[CTO NAME]</h3>
+          <div class="executive-title">Chief Technology Officer & Co-Founder</div>
+          <p class="executive-bio">
+            A brilliant technologist and security researcher who has been at the forefront of
+            cryptographic innovations for over 15 years. They've published numerous academic papers
+            on advanced encryption methodologies and hold multiple patents.
+          </p>
+          <div class="executive-stats">
+            <div class="stat-item">
+              <i class="fas fa-award"></i>
+              <span>12 Security Patents</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-university"></i>
+              <span>Stanford, Ph.D. Cryptography</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSO Card -->
+      <div class="executive-card">
+        <div class="executive-image">
+          <img src="B.png" alt="CSO Placeholder" />
+        </div>
+        <div class="executive-info">
+          <h3 class="executive-name">[CSO NAME]</h3>
+          <div class="executive-title">Chief Security Officer</div>
+          <p class="executive-bio">
+            An internationally recognized expert in threat intelligence and incident response
+            with extensive experience protecting some of the world's largest organizations.
+            Prior to joining SHA2, they led security operations for a major financial institution.
+          </p>
+          <div class="executive-stats">
+            <div class="stat-item">
+              <i class="fas fa-shield-alt"></i>
+              <span>CISSP, CISM Certified</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-university"></i>
+              <span>Georgetown, Cybersecurity</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- COO Card -->
+      <div class="executive-card">
+        <div class="executive-image">
+          <img src="D.png" alt="COO Placeholder" />
+        </div>
+        <div class="executive-info">
+          <h3 class="executive-name">[COO NAME]</h3>
+          <div class="executive-title">Chief Operating Officer</div>
+          <p class="executive-bio">
+            A strategic business leader with a proven track record of scaling high-growth
+            technology companies. They bring over 18 years of operational experience from
+            both startups and established enterprises in the technology sector.
+          </p>
+          <div class="executive-stats">
+            <div class="stat-item">
+              <i class="fas fa-chart-line"></i>
+              <span>18+ Years in Tech Ops</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-university"></i>
+              <span>Harvard, MBA</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<footer>
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="logo" style="color: white; margin-bottom: 1rem;">SHA<span>2</span></div>
+          <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Protecting Tomorrow - Today.</p>
+
+        </div>
+
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="./solutions.html#threat-protection">Threat Protection</a></li>
+            <li><a href="./solutions.html#data-security">Data Security</a></li>
+            <li><a href="./solutions.html#cloud-security">Cloud Security</a></li>
+            <li><a href="./solutions.html#identity-management">Identity Management</a></li>
+            <li><a href="./solutions.html#network-security">Network Security</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./leadership.html">Leadership</a></li>
+            <li><a href="./career.html">Careers</a></li>
+            <li><a href="./imprint.html">Imprint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> SHA2: Protecting Tomorrow - Today. All rights reserved.
+      </div>
+    </footer>
+
+    <div class="scroll-top">
+      <i class="fas fa-chevron-up"></i>
+    </div>
+
+
+<script>
+  // Dynamic year display (optional, remove if unused)
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Canvas animation (enhanced color-transition animation)
+  const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, points;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    generatePoints();
+  }
+
+  function generatePoints() {
+    const density = 4000;
+    const numPoints = Math.floor((width * height) / density);
+    points = [];
+    for (let i = 0; i < numPoints; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        colorProgress: i < numPoints / 2 ? 0 : 1 // Half blue, half red
+      });
+    }
+    shuffle(points);
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function lerpColor(a, b, t) {
+    const r = Math.round(a[0] + (b[0] - a[0]) * t);
+    const g = Math.round(a[1] + (b[1] - a[1]) * t);
+    const b_ = Math.round(a[2] + (b[2] - a[2]) * t);
+    return `rgb(${r},${g},${b_})`;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x <= 0 || p.x >= width) p.vx *= -1;
+      if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = lerpColor([59, 130, 246], [239, 68, 68], p.colorProgress); // blue to red
+      ctx.fill();
+    }
+
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      let blueConnections = 0;
+      let redConnections = 0;
+
+      for (let j = 0; j < points.length; j++) {
+        if (i === j) continue;
+        const q = points[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          const midProgress = (p.colorProgress + q.colorProgress) / 2;
+          ctx.strokeStyle = lerpColor([59, 130, 246], [239, 68, 68], midProgress);
+          ctx.globalAlpha = 1 - dist / 120;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+
+          if (q.colorProgress < 0.5) {
+            blueConnections++;
+          } else {
+            redConnections++;
+          }
+        }
+      }
+
+      if (blueConnections > redConnections) {
+        p.colorProgress = Math.max(0, p.colorProgress - 0.002);
+      } else if (redConnections > blueConnections) {
+        p.colorProgress = Math.min(1, p.colorProgress + 0.002);
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  // Scroll to top button logic
+  const scrollTopBtn = document.getElementById('scroll-top') || document.querySelector('.scroll-top');
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+
+</body>
+</html>

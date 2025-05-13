@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise Security Solutions | SHA2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+       min-height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      /*overflow-x: hidden;*/
+      color: #1a1a1a;
+      scroll-behavior: smooth;
+    }
+
+    #network-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.4;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #0a2463;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 80px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0a2463;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #3e92cc;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cta-container {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #0a2463;
+      background: transparent;
+      color: #0a2463;
+    }
+
+    .btn-primary {
+      background: #0a2463;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: rgba(10, 36, 99, 0.05);
+    }
+
+    .page-title {
+      position: relative;
+      z-index: 1;
+      background: #0a2463;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .page-title h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .page-title p {
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #b3c5ef;
+    }
+
+    .solutions-nav {
+  background: white;
+  padding: 1rem 0;
+  /*position: sticky;*/
+  /*top: 80px;  !* Adjust based on your header height *!*/
+  z-index: 100;  /* Increased z-index */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.solutions-nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  /* Remove position: sticky here */
+}
+
+    .solutions-nav a {
+      color: #4a5568;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .solutions-nav a:hover {
+      color: #0a2463;
+    }
+
+    .solutions-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    .solutions-nav a:hover::after {
+      width: 100%;
+    }
+
+    .solution-section {
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .solution-section:nth-child(odd) {
+      background-color: white;
+    }
+
+    .solution-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .solution-section:nth-child(even) .solution-grid {
+      direction: rtl;
+    }
+
+    .solution-section:nth-child(even) .solution-grid > div {
+      direction: ltr;
+    }
+
+    .solution-content h2 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: #0a2463;
+      margin-bottom: 1.5rem;
+    }
+
+    .solution-content p {
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-size: 1.05rem;
+    }
+
+    .solution-content ul {
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
+    }
+
+    .solution-content ul li {
+      margin-bottom: 0.75rem;
+      color: #4a5568;
+      line-height: 1.5;
+    }
+
+    .solution-image {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    .solution-image::before {
+      content: '';
+      display: block;
+      padding-top: 75%;
+    }
+
+    .solution-image-1 {
+      background: linear-gradient(135deg, #0a2463, #3e92cc);
+    }
+
+    .solution-image-2 {
+      background: linear-gradient(135deg, #2a4494, #4e6ad4);
+    }
+
+    .solution-image-3 {
+      background: linear-gradient(135deg, #0061a8, #6abce2);
+    }
+
+    .solution-image-4 {
+      background: linear-gradient(135deg, #1e3a8a, #4f85e1);
+    }
+
+    .solution-image-5 {
+      background: linear-gradient(135deg, #0f4c75, #3282b8);
+    }
+
+    .solution-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 5rem;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #f0f0f0;
+    }
+
+    .feature-card i {
+      color: #3e92cc;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: #0a2463;
+    }
+
+    .feature-card p {
+      color: #4a5568;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    footer {
+      background: #0a2463;
+      color: #ffffff;
+      padding: 4rem 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li a {
+      color: #b3c5ef;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #b3c5ef;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0a2463;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+      z-index: 100;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      background: #143a8c;
+    }
+
+    @media (max-width: 1024px) {
+      header {
+        padding: 1.2rem 2rem;
+      }
+
+      .solution-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+
+      .page-title h1 {
+        font-size: 2.5rem;
+      }
+
+      .solutions-nav-container {
+        /*flex-wrap: wrap;*/
+      }
+
+      .solution-section {
+        padding: 4rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network-canvas"></canvas>
+
+<header>
+    <div class="logo-container">
+      <div class="logo"><a href="./index.html">SHA<span>2</span></a></div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="./solutions.html">Solutions</a></li>
+        <li><a href="./about-us.html">About Us</a></li>
+        <li><a href="./leadership.html">Leadership</a></li>
+        <li><a href="./career.html">Careers</a></li>
+      </ul>
+    </nav>
+
+    <div class="cta-container">
+      <a href="./customer-portal.html">
+      <button class="btn btn-outline">Client Portal</button>
+      </a>
+    </div>
+  </header>
+
+  <div class="page-title">
+    <h1>Enterprise Security Solutions</h1>
+    <p>Comprehensive protection for your most valuable digital assets</p>
+  </div>
+
+  <nav class="solutions-nav">
+    <div class="solutions-nav-container">
+      <a href="#threat-protection">Threat Protection</a>
+      <a href="#data-security">Data Security</a>
+      <a href="#cloud-security">Cloud Security</a>
+      <a href="#identity-management">Identity Management</a>
+      <a href="#network-security">Network Security</a>
+    </div>
+  </nav>
+
+  <section id="threat-protection" class="solution-section">
+    <div class="solution-grid">
+      <div class="solution-content">
+        <h2>Threat Protection</h2>
+        <p>In today's evolving threat landscape, proactive defense is no longer optional—it's essential. SHA2's Threat Protection suite provides comprehensive security against sophisticated cyber threats targeting your enterprise.</p>
+        <p>Our advanced threat intelligence platform combines machine learning, behavioral analytics, and expert human supervision to detect and neutralize threats before they impact your business.</p>
+        <ul>
+          <li>Real-time threat detection and prevention with 99.9% accuracy</li>
+          <li>Zero-day vulnerability protection through behavioral analysis</li>
+          <li>APT (Advanced Persistent Threat) detection and mitigation</li>
+          <li>Continuous threat monitoring with 24/7 SOC support</li>
+        </ul>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-shield-virus"></i>
+            <h3>Malware Protection</h3>
+            <p>Advanced protection against ransomware, trojans, and emerging malware variants.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-bug"></i>
+            <h3>Vulnerability Management</h3>
+            <p>Automated scanning and remediation of security vulnerabilities across your infrastructure.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-user-shield"></i>
+            <h3>Endpoint Security</h3>
+            <p>Comprehensive protection for all endpoints with minimal performance impact.</p>
+          </div>
+        </div>
+      </div>
+      <div class="solution-image solution-image-1">
+        <div class="solution-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="data-security" class="solution-section">
+    <div class="solution-grid">
+      <div class="solution-content">
+        <h2>Data Security</h2>
+        <p>Your data is your most valuable asset. SHA2's Data Security solutions ensure that sensitive information remains protected throughout its lifecycle, whether at rest, in transit, or in use.</p>
+        <p>We implement military-grade encryption, granular access controls, and data loss prevention technologies to maintain the confidentiality and integrity of your critical business information.</p>
+        <ul>
+          <li>End-to-end encryption for data at rest and in transit</li>
+          <li>Data classification and discovery to identify sensitive information</li>
+          <li>Data loss prevention (DLP) to prevent unauthorized data exfiltration</li>
+          <li>Secure data archiving and compliance-ready retention policies</li>
+        </ul>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-lock"></i>
+            <h3>Encryption Management</h3>
+            <p>Centralized key management and encryption policies across your enterprise.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-eye-slash"></i>
+            <h3>Privacy Controls</h3>
+            <p>Tools to maintain compliance with GDPR, CCPA, and other privacy regulations.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-file-signature"></i>
+            <h3>Digital Rights Management</h3>
+            <p>Control how, when, and by whom your sensitive documents can be accessed.</p>
+          </div>
+        </div>
+      </div>
+      <div class="solution-image solution-image-2">
+        <div class="solution-icon">
+          <i class="fas fa-database"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cloud-security" class="solution-section">
+    <div class="solution-grid">
+      <div class="solution-content">
+        <h2>Cloud Security</h2>
+        <p>As organizations migrate to the cloud, security architectures must adapt. SHA2's Cloud Security platform provides unified protection across hybrid, multi-cloud, and traditional environments.</p>
+        <p>Our cloud-native security solutions integrate seamlessly with major cloud service providers while offering consistent policy enforcement and visibility across your entire infrastructure.</p>
+        <ul>
+          <li>Cloud Security Posture Management (CSPM) for continuous compliance</li>
+          <li>Cloud Workload Protection Platform (CWPP) for runtime security</li>
+          <li>Secure access service edge (SASE) architecture implementation</li>
+          <li>Container and serverless security protection</li>
+        </ul>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>Cloud Configuration Security</h3>
+            <p>Prevent misconfigurations and enforce security best practices in cloud environments.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-server"></i>
+            <h3>Virtualization Security</h3>
+            <p>Protect virtual machines and hypervisors with purpose-built security controls.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-route"></i>
+            <h3>Cloud Network Security</h3>
+            <p>Micro-segmentation and traffic analysis for cloud networks and services.</p>
+          </div>
+        </div>
+      </div>
+      <div class="solution-image solution-image-3">
+        <div class="solution-icon">
+          <i class="fas fa-cloud"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="identity-management" class="solution-section">
+    <div class="solution-grid">
+      <div class="solution-content">
+        <h2>Identity Management</h2>
+        <p>In a perimeter-less world, identity has become the new security boundary. SHA2's Identity Management solutions provide robust authentication and authorization mechanisms that protect your resources without compromising user experience.</p>
+        <p>Our zero-trust approach ensures that identities are continuously verified and access privileges are granted on a need-to-know basis, reducing your attack surface and minimizing risk.</p>
+        <ul>
+          <li>Identity and Access Management (IAM) with role-based controls</li>
+          <li>Multi-factor authentication and passwordless authentication options</li>
+          <li>Privileged Access Management (PAM) for administrative accounts</li>
+          <li>User behavior analytics to detect compromised credentials</li>
+        </ul>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-id-card"></i>
+            <h3>Single Sign-On</h3>
+            <p>Streamlined access to all enterprise applications with robust security controls.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-user-lock"></i>
+            <h3>Lifecycle Management</h3>
+            <p>Automated provisioning and deprovisioning of user accounts and access rights.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-fingerprint"></i>
+            <h3>Biometric Integration</h3>
+            <p>Support for biometric authentication methods for enhanced security.</p>
+          </div>
+        </div>
+      </div>
+      <div class="solution-image solution-image-4">
+        <div class="solution-icon">
+          <i class="fas fa-users-cog"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="network-security" class="solution-section">
+    <div class="solution-grid">
+      <div class="solution-content">
+        <h2>Network Security</h2>
+        <p>Even in a cloud-first world, network security remains critical. SHA2's Network Security solutions protect your infrastructure against both external attacks and internal threats with next-generation technologies.</p>
+        <p>Our integrated approach combines traditional perimeter defenses with advanced network traffic analysis and zero-trust network access principles for comprehensive protection.</p>
+        <ul>
+          <li>Next-generation firewall capabilities with application awareness</li>
+          <li>Intrusion Detection and Prevention Systems (IDS/IPS)</li>
+          <li>Software-defined perimeter and micro-segmentation</li>
+          <li>Encrypted traffic analysis without decryption</li>
+        </ul>
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-network-wired"></i>
+            <h3>Network Access Control</h3>
+            <p>Control device access to your network based on security posture assessment.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-wifi"></i>
+            <h3>Wireless Security</h3>
+            <p>Enterprise-grade protection for wireless networks and connected devices.</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-project-diagram"></i>
+            <h3>SD-WAN Security</h3>
+            <p>Secure software-defined wide area networks for distributed enterprises.</p>
+          </div>
+        </div>
+      </div>
+      <div class="solution-image solution-image-5">
+        <div class="solution-icon">
+          <i class="fas fa-sitemap"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="logo" style="color: white; margin-bottom: 1rem;">SHA<span>2</span></div>
+          <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Protecting Tomorrow - Today.</p>
+
+        </div>
+
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="#threat-protection">Threat Protection</a></li>
+            <li><a href="#data-security">Data Security</a></li>
+            <li><a href="#cloud-security">Cloud Security</a></li>
+            <li><a href="#identity-management">Identity Management</a></li>
+            <li><a href="#network-security">Network Security</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./leadership.html">Leadership</a></li>
+            <li><a href="./career.html">Careers</a></li>
+            <li><a href="./imprint.html">Imprint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> SHA2: Protecting Tomorrow - Today. All rights reserved.
+      </div>
+    </footer>
+
+    <div class="scroll-top">
+      <i class="fas fa-chevron-up"></i>
+    </div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Canvas animation (same as main page)
+  const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, points;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    generatePoints();
+  }
+
+  function generatePoints() {
+    const density = 4000; // Adjust density: lower = more points
+    const numPoints = Math.floor((width * height) / density);
+    points = [];
+    for (let i = 0; i < numPoints; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        colorProgress: i < numPoints / 2 ? 0 : 1 // Half blue, half red
+      });
+    }
+    shuffle(points); // Shuffle to mix red/blue positions
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function lerpColor(a, b, t) {
+    const r = Math.round(a[0] + (b[0] - a[0]) * t);
+    const g = Math.round(a[1] + (b[1] - a[1]) * t);
+    const b_ = Math.round(a[2] + (b[2] - a[2]) * t);
+    return `rgb(${r},${g},${b_})`;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Move points
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x <= 0 || p.x >= width) p.vx *= -1;
+      if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = lerpColor([59, 130, 246], [239, 68, 68], p.colorProgress); // Blue to Red
+      ctx.fill();
+    }
+
+    // Analyze connections
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      let blueConnections = 0;
+      let redConnections = 0;
+
+      for (let j = 0; j < points.length; j++) {
+        if (i === j) continue;
+        const q = points[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          // Draw connection
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          const midProgress = (p.colorProgress + q.colorProgress) / 2;
+          ctx.strokeStyle = lerpColor([59, 130, 246], [239, 68, 68], midProgress);
+          ctx.globalAlpha = 1 - dist / 120;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+
+          // Count neighbor colors
+          if (q.colorProgress < 0.5) {
+            blueConnections++;
+          } else {
+            redConnections++;
+          }
+        }
+      }
+
+      // Gradually adjust colorProgress based on neighbor influence
+      if (blueConnections > redConnections) {
+        p.colorProgress = Math.max(0, p.colorProgress - 0.002); // move toward blue
+      } else if (redConnections > blueConnections) {
+        p.colorProgress = Math.min(1, p.colorProgress + 0.002); // move toward red
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  // Scroll to top button
+  const scrollTopBtn = document.querySelector('.scroll-top');
+
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+
+</body>
+</html>

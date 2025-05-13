@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHA2: Enterprise Security Solutions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f9fafb;
+      overflow-x: hidden;
+      color: #1a1a1a;
+    }
+
+    #network-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.8;
+    }
+
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 1.2rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 80px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0a2463;
+      letter-spacing: -0.5px;
+    }
+
+    .logo a:visited {
+  color: inherit;
+}
+
+    .logo a {
+  text-decoration: none;   /* ← Removes underline always */
+  color: inherit;
+}
+
+.logo a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+    .logo span {
+      color: #3e92cc;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #0a2463;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background-color: #3e92cc;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .cta-container {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .btn {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #0a2463;
+      background: transparent;
+      color: #0a2463;
+    }
+
+    .btn-primary {
+      background: #0a2463;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(10, 36, 99, 0.15);
+    }
+
+    .btn-outline:hover {
+      background: rgba(10, 36, 99, 0.05);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 80px);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      color: #0a2463;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #4a5568;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+    }
+
+    .solutions {
+      padding: 6rem 4rem;
+      background: white;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #0a2463;
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .solution-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid #f0f0f0;
+    }
+
+    .solution-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .solution-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: #f0f7ff;
+      margin-bottom: 1.5rem;
+    }
+
+    .solution-icon i {
+      font-size: 1.75rem;
+      color: #3e92cc;
+    }
+
+    .solution-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #0a2463;
+      font-weight: 600;
+    }
+
+    .solution-card p {
+      color: #4a5568;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .solution-card a {
+      color: #3e92cc;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .solution-card a i {
+      margin-left: 6px;
+      font-size: 0.9rem;
+      transition: transform 0.2s;
+    }
+
+    .solution-card a:hover i {
+      transform: translateX(4px);
+    }
+
+    .stats {
+      padding: 5rem 2rem;
+      background: linear-gradient(to right, #f6f9fc, #eef4fd);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #0a2463;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      color: #4a5568;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    footer {
+      background: #0a2463;
+      color: #ffffff;
+      padding: 4rem 4rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 3rem;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-col ul li a {
+      color: #b3c5ef;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: white;
+    }
+    .copyright {
+      text-align: center;
+      padding-top: 3rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: #b3c5ef;
+    }
+
+    @media (max-width: 1024px) {
+      header {
+        padding: 1.2rem 2rem;
+      }
+
+      nav ul {
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+      }
+
+      nav ul {
+        margin: 1rem 0;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .solutions {
+        padding: 4rem 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="network-canvas"></canvas>
+
+  <div style="position: relative; z-index: 1;">
+<header>
+    <div class="logo-container">
+      <div class="logo"><a href="./index.html">SHA<span>2</span></a></div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="./solutions.html">Solutions</a></li>
+        <li><a href="./about-us.html">About Us</a></li>
+        <li><a href="./leadership.html">Leadership</a></li>
+        <li><a href="./career.html">Careers</a></li>
+      </ul>
+    </nav>
+
+    <div class="cta-container">
+      <a href="./customer-portal.html">
+      <button class="btn btn-outline">Client Portal</button>
+      </a>
+    </div>
+  </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Enterprise Security for a Connected World</h1>
+        <p>Safeguarding businesses with advanced cybersecurity solutions that protect critical infrastructure, sensitive data, and digital assets.</p>
+        <div class="hero-cta">
+          <a href="solutions.html">
+            <button class="btn btn-primary">Explore Solutions</button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="solutions">
+      <div class="section-title">
+        <h2>Comprehensive Security Solutions</h2>
+        <p>Integrated security platforms tailored to enterprise needs</p>
+      </div>
+
+      <div class="solutions-grid">
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Threat Protection</h3>
+          <p>Advanced threat detection and prevention systems to safeguard your organization from evolving cyber threats.</p>
+          <a href="#">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h3>Data Security</h3>
+          <p>Protect sensitive information with industry-leading encryption and access management protocols.</p>
+          <a href="#">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h3>Data Security</h3>
+          <p>Protect sensitive information with industry-leading encryption and access management protocols.</p>
+          <a href="#">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <h3>Data Security</h3>
+          <p>Protect sensitive information with industry-leading encryption and access management protocols.</p>
+          <a href="#">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-icon">
+            <i class="fas fa-cloud"></i>
+          </div>
+          <h3>Cloud Security</h3>
+          <p>Secure cloud infrastructure and applications with comprehensive monitoring and protection.</p>
+          <a href="#">Learn more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Enterprise Clients</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">Threat Detection Rate</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Global Support</div>
+        </div>
+
+        <div class="stat-item">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Years of Excellence</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-col">
+          <div class="logo" style="color: white; margin-bottom: 1rem;">SHA<span>2</span></div>
+          <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Protecting Tomorrow - Today.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <ul>
+            <li><a href="./solutions.html#threat-protection">Threat Protection</a></li>
+            <li><a href="./solutions.html#data-security">Data Security</a></li>
+            <li><a href="./solutions.html#cloud-security">Cloud Security</a></li>
+            <li><a href="./solutions.html#identity-management">Identity Management</a></li>
+            <li><a href="./solutions.html#network-security">Network Security</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="./about-us.html">About Us</a></li>
+            <li><a href="./leadership.html">Leadership</a></li>
+            <li><a href="./career.html">Careers</a></li>
+            <li><a href="./imprint.html">Imprint</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> SHA2: Protecting Tomorrow - Today. All rights reserved.
+      </div>
+    </footer>
+  </div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const canvas = document.getElementById('network-canvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, points;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    generatePoints();
+  }
+
+  function generatePoints() {
+  const density = 4000; // Adjust density: lower = more points
+  const numPoints = Math.floor((width * height) / density);
+  points = [];
+  for (let i = 0; i < numPoints; i++) {
+    points.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      colorProgress: i < numPoints / 2 ? 0 : 1 // Half blue, half red
+    });
+  }
+    shuffle(points); // Shuffle to mix red/blue positions
+  }
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function lerpColor(a, b, t) {
+    const r = Math.round(a[0] + (b[0] - a[0]) * t);
+    const g = Math.round(a[1] + (b[1] - a[1]) * t);
+    const b_ = Math.round(a[2] + (b[2] - a[2]) * t);
+    return `rgb(${r},${g},${b_})`;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Move points
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x <= 0 || p.x >= width) p.vx *= -1;
+      if (p.y <= 0 || p.y >= height) p.vy *= -1;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = lerpColor([59, 130, 246], [239, 68, 68], p.colorProgress); // Blue to Red
+      ctx.fill();
+    }
+
+    // Analyze connections
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      let blueConnections = 0;
+      let redConnections = 0;
+
+      for (let j = 0; j < points.length; j++) {
+        if (i === j) continue;
+        const q = points[j];
+        const dx = p.x - q.x;
+        const dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 120) {
+          // Draw connection
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          const midProgress = (p.colorProgress + q.colorProgress) / 2;
+          ctx.strokeStyle = lerpColor([59, 130, 246], [239, 68, 68], midProgress);
+          ctx.globalAlpha = 1 - dist / 120;
+          ctx.lineWidth = 0.7;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+
+          // Count neighbor colors
+          if (q.colorProgress < 0.5) {
+            blueConnections++;
+          } else {
+            redConnections++;
+          }
+        }
+      }
+
+      // Gradually adjust colorProgress based on neighbor influence
+      if (blueConnections > redConnections) {
+        p.colorProgress = Math.max(0, p.colorProgress - 0.002); // move toward blue
+      } else if (redConnections > blueConnections) {
+        p.colorProgress = Math.min(1, p.colorProgress + 0.002); // move toward red
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  draw();
+</script>
+</body>
+</html>
