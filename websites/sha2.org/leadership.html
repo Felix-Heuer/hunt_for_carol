@@ -205,7 +205,7 @@ nav ul {
     .page-content {
       position: relative;
       z-index: 1;
-      max-width: 1200px;
+      max-width: 1600px;
       margin: 0 auto;
       padding: 4rem 2rem;
     }
@@ -232,7 +232,7 @@ nav ul {
     /* New leadership grid layout - 4 columns */
     .leadership-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 2rem;
     }
 
@@ -251,21 +251,22 @@ nav ul {
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
 
-    .executive-image {
-      width: 100%;
-      height: 250px;
-      background-color: #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+.executive-image {
+  width: 100%;
+  height: 250px;
+  background-color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-    .executive-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.executive-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
 
     .executive-info {
       padding: 1.5rem;
@@ -428,9 +429,21 @@ nav ul {
       }
     }
 
-    @media (max-width: 576px) {
-      .executive-stats {
+    @media (max-width: 1024px) {
+      header {
+        padding: 1.2rem 2rem;
+      }
+
+      nav ul {
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
         flex-direction: column;
+        height: auto;
+        padding: 1rem;
       }
 
       .stat-item {
@@ -465,7 +478,7 @@ nav ul {
 
   <div class="page-title">
     <h1>Our Leadership Team</h1>
-    <p>Meet the visionaries driving innovation in enterprise security</p>
+    <p>Meet the five visionaries driving innovation in enterprise security</p>
   </div>
 
   <div class="page-content">
@@ -485,11 +498,11 @@ nav ul {
           <img src="C.png" alt="CEO Placeholder" />
         </div>
         <div class="executive-info">
-          <h3 class="executive-name">[CEO NAME]</h3>
+          <h3 class="executive-name">Dr. hc. Bradley Mitchell</h3>
           <div class="executive-title">Chief Executive Officer & Co-Founder</div>
           <p class="executive-bio">
             A visionary leader with over 20 years of experience in cybersecurity and enterprise software.
-            Before founding SHA2, they held leadership positions at several Fortune 500 companies and led
+            Before founding SHA2 (formerly Pillarstone Security), he held leadership positions at several Fortune 500 companies and led
             the development of groundbreaking security technologies.
           </p>
           <div class="executive-stats">
@@ -511,11 +524,11 @@ nav ul {
           <img src="A.png" alt="CTO Placeholder" />
         </div>
         <div class="executive-info">
-          <h3 class="executive-name">[CTO NAME]</h3>
+          <h3 class="executive-name">Dr. Carolina Mendoza</h3>
           <div class="executive-title">Chief Technology Officer & Co-Founder</div>
           <p class="executive-bio">
             A brilliant technologist and security researcher who has been at the forefront of
-            cryptographic innovations for over 15 years. They've published numerous academic papers
+            cryptographic innovations for over 15 years. She has published numerous academic papers
             on advanced encryption methodologies and hold multiple patents.
           </p>
           <div class="executive-stats">
@@ -531,18 +544,44 @@ nav ul {
         </div>
       </div>
 
+      <div class="executive-card">
+  <div class="executive-image">
+    <img src="E.png" alt="Head of Research Placeholder" />
+  </div>
+  <div class="executive-info">
+    <h3 class="executive-name">Dr. Sigríður Jónsdóttir</h3>
+    <div class="executive-title">Head of Research</div>
+    <p class="executive-bio">
+      A brilliant computer scientist and research leader with extensive expertise in machine learning and cybersecurity algorithms.
+      Dr. Jónsdóttir has pioneered innovative approaches to threat detection and published numerous papers in top-tier academic journals.
+      Her groundbreaking work bridges theoretical computer science with practical security applications.
+    </p>
+    <div class="executive-stats">
+      <div class="stat-item">
+        <i class="fas fa-flask"></i>
+        <span>H Index of 23</span>
+      </div>
+      <div class="stat-item">
+        <i class="fas fa-university"></i>
+        <span>Cambridge, Ph.D. Computer Science</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
       <!-- CSO Card -->
       <div class="executive-card">
         <div class="executive-image">
           <img src="B.png" alt="CSO Placeholder" />
         </div>
         <div class="executive-info">
-          <h3 class="executive-name">[CSO NAME]</h3>
+          <h3 class="executive-name">Tiago Ferreira</h3>
           <div class="executive-title">Chief Security Officer</div>
           <p class="executive-bio">
             An internationally recognized expert in threat intelligence and incident response
             with extensive experience protecting some of the world's largest organizations.
-            Prior to joining SHA2, they led security operations for a major financial institution.
+            Prior to joining SHA2, he led security operations for a major financial institution.
           </p>
           <div class="executive-stats">
             <div class="stat-item">
@@ -564,11 +603,11 @@ nav ul {
           <img src="D.png" alt="COO Placeholder" />
         </div>
         <div class="executive-info">
-          <h3 class="executive-name">[COO NAME]</h3>
+          <h3 class="executive-name">Eszter Kovács</h3>
           <div class="executive-title">Chief Operating Officer</div>
           <p class="executive-bio">
             A strategic business leader with a proven track record of scaling high-growth
-            technology companies. They bring over 18 years of operational experience from
+            technology companies. She brings over 18 years of operational experience from
             both startups and established enterprises in the technology sector.
           </p>
           <div class="executive-stats">

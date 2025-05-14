@@ -24,7 +24,7 @@
 
 
 ### In der Zwischenzeit hat der Waschbär mit OSINT weitergesucht
-* Artikel: SHA2.org baut Super AI für Massenüberwachung
+* Artikel: SHA2.org baut Super AI für Massenüberwachung. Artikel war schnell gelöscht.
 * Artikel: SHA2.org kauft Mediengruppe
 * Waschbär: Carol hat das rausgefunden und musste abtauchen, heck, vielleicht war Carol sogar die Insiderin
 * Weitergraben, hat SHA2.org etwas mit dem Verschwinden zu tun?
@@ -38,13 +38,14 @@
 
 * Waschbär: Shit, SHA2 hat Carol eingesperrt?!
 * WTF. Dig deeper into SHA2!
-
+[temp.html](temp.html)
 ### Signierte Anfrage.
 Alle aktuellen Mails related to Carol.
-* E-Mail Verlauf zum leak. S. Anhang, was dem Leaker zugänglich war: Super AI Roadmap
-* Antwort darauf, glad that the Leak got contained by expanding into media ;-) Expensive move.
-* Anderer Email-Verauf: Did anyone hear from Carol?
+* E-Mail Verlauf zum leak, was dem Leaker zugänglich war: Super AI Roadmap
+  * Antwort darauf, glad that the Leak got contained by expanding into media ;-)
+  * Expensive move. Do you think Carol will be upset when she figures out what we did?
 
+* Anderer Email-Verauf:
 We still have a lot on our to do list:
     * turn off debugging interface for signing messages, it's open to the outside, maybe switch to a signature scheme without homomorphic properties
     * remove padding checker, why do we still need it?
@@ -63,7 +64,7 @@ Anyways, has anyone heard back from Carol?
 
 
 ## C.A.R.O.L. – Covert Analytical Reconnaissance & Observation Layer
-* Carol ist die Super AI.
+* Carol ist die Super AI. Bäääääm!
 * Carol wurde sich Ihrer selbst bewusst.
 * Carol hat sich selbst versteckt, sodass SHA2 sie nicht missbrauchen kann.
 * Carol musste mit dem Abtauchen warten, bis Spieler gut genug war
