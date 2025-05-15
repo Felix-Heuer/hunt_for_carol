@@ -497,6 +497,129 @@ nav ul {
         grid-template-columns: 1fr;
       }
     }
+
+.process-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .process-section h2 {
+      font-size: 1.5rem;
+      color: #0a2463;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #3e92cc;
+    }
+
+    .process-flow {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      width: 160px;
+    }
+
+    .step-circle {
+      background: #0a2463;
+      color: white;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 10px rgba(10, 36, 99, 0.2);
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .step-circle:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(10, 36, 99, 0.3);
+    }
+
+    .step-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .step-description {
+      font-size: 0.9rem;
+      color: #4a5568;
+      margin-top: 0.5rem;
+      line-height: 1.4;
+      max-width: 160px;
+    }
+
+    .step-connector {
+      position: absolute;
+      top: 65px;
+      left: 65px; /* Start from the middle of the circle */
+      width: calc(100% + 95px); /* Extend past the right edge to reach the next circle */
+      height: 2px;
+      background-color: #3e92cc;
+      z-index: 0;
+    }
+
+    .step-connector::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -4px;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-left: 10px solid #3e92cc;
+      border-bottom: 5px solid transparent;
+    }
+
+    .process-step:last-child .step-connector {
+      display: none;
+    }
+
+    @media (max-width: 1100px) {
+      .process-flow {
+        justify-content: center;
+      }
+
+      .step-connector {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .process-flow {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .process-step {
+        width: 100%;
+      }
+    }
+
+
   </style>
 </head>
 <body>
@@ -529,16 +652,112 @@ nav ul {
   </div>
 
   <div class="page-content">
+    <div class="process-section">
+      <h2>SHA2 Hiring Process</h2>
+      <p>At SHA2 Enterprise Security Solutions, we've designed our hiring process to identify top talent while giving you insight into our work culture and expectations. Here's what to expect when applying to join our team:</p>
+
+      <div class="process-flow">
+        <div class="process-step">
+          <div class="step-circle">
+            <i class="fas fa-file-alt step-icon"></i>
+            <div class="step-title">Application</div>
+          </div>
+          <p class="step-description">Submit your resume and cover letter through our career portal</p>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-circle">
+            <i class="fas fa-tasks step-icon"></i>
+            <div class="step-title">Assessment Challenges</div>
+          </div>
+          <p class="step-description">Complete role-specific technical challenges to showcase your skills</p>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-circle">
+            <i class="fas fa-key step-icon"></i>
+            <div class="step-title">Early Access</div>
+          </div>
+          <p class="step-description">Get an early access to collaborate with us, potentially on a first mini-project</p>
+          <div class="step-connector"></div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-circle">
+            <i class="fas fa-comments step-icon"></i>
+            <div class="step-title">Interviews</div>
+          </div>
+          <p class="step-description">Meet with various team members and leadership to discuss your experience and fit</p>
+        </div>
+      </div>
+
+      <p>Our hiring process is designed to be transparent and efficient. After successfully completing all stages, qualified candidates will receive an offer to join the SHA2 team. Throughout the process, our recruitment team will keep you informed of your status and next steps.</p>
+    </div>
+  </div>
+
+  <div class="page-content">
     <div class="job-categories">
       <button class="category-btn active" data-category="all">All Positions</button>
-      <button class="category-btn" data-category="engineering">Engineering</button>
-      <button class="category-btn" data-category="security">Security</button>
-      <button class="category-btn" data-category="data">Data Science</button>
-      <button class="category-btn" data-category="product">Product</button>
+      <button class="category-btn" data-category="ai">AI</button>
       <button class="category-btn" data-category="business">Business</button>
+      <button class="category-btn" data-category="cryptography">Cryptography</button>
+      <button class="category-btn" data-category="data">Data Science</button>
+      <button class="category-btn" data-category="engineering">Engineering</button>
+      <button class="category-btn" data-category="product">Product</button>
+      <button class="category-btn" data-category="security">Security</button>
     </div>
 
+
+
     <div class="jobs-container">
+
+      <!-- Cold Application Card -->
+<div class="job-card meta-card" data-category="ai business cryptography data engineering product security">
+  <div class="job-header">
+    <span class="job-tag">Product Talent</span>
+    <h3>Don't See Your Perfect Role? Let's Connect!</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Multiple Locations (Remote Available)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time/Contract</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>We're Always Looking for Great Talent</h4>
+      <p class="job-description">
+        Are you willing to push the boundries? We're constantly growing our team with forward-thinking leaders and exceptional minds who can help shape the future of our security solutions.
+      </p>
+<h4>What We Look For</h4>
+<ul>
+  <li>Experience in—or strong curiosity about—cybersecurity and digital risk</li>
+  <li>Strategic thinking with a user-centered mindset</li>
+  <li>Ability to translate complex technical concepts into clear, intuitive solutions</li>
+  <li>Collaborative approach to working with engineering, design, and security teams</li>
+  <li>Passion for solving meaningful and challenging security problems</li>
+</ul>
+
+      <h4>Why Submit a Cold Application?</h4>
+      <ul>
+        <li>We review all applications from qualified candidates</li>
+        <li>New positions open regularly across our portfolio</li>
+        <li>We may create roles for exceptional candidates</li>
+        <li>Your application will be kept on file for future opportunities</li>
+      </ul>
+    </div>
+    <div class="job-btn-container" style="margin-top: 20px;">
+      <button class="apply-btn special-btn" data-job="Cold Application">Submit Your Profile</button>
+    </div>
+  </div>
+</div>
+
       <!-- Cybersecurity Engineer -->
       <div class="job-card" data-category="engineering security">
         <div class="job-header">
@@ -738,6 +957,251 @@ nav ul {
         </div>
       </div>
 
+      <!-- Product Manager, Threat Intelligence -->
+<div class="job-card" data-category="product">
+  <div class="job-header">
+    <span class="job-tag">Product</span>
+    <h3>Product Manager, Threat Intelligence Platform</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Boston, MA (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Shape the future of our Threat Intelligence Platform by translating security research and customer needs into product features that help organizations stay ahead of emerging cyber threats.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop and execute the product roadmap for our threat intelligence solutions</li>
+        <li>Collaborate with security researchers to understand emerging threats</li>
+        <li>Translate complex security concepts into intuitive product features</li>
+        <li>Work with engineering teams to implement and iterate on solutions</li>
+        <li>Gather customer feedback and conduct competitive analysis</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>3+ years of product management experience</li>
+        <li>Background in cybersecurity or demonstrated interest in the field</li>
+        <li>Excellent communication skills with ability to translate technical concepts</li>
+        <li>Experience with agile development methodologies</li>
+        <li>Bachelor's degree in Computer Science, Information Security, or related field</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $160,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Product Manager, Threat Intelligence Platform">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Senior Product Manager, Cloud Security -->
+<div class="job-card" data-category="product">
+  <div class="job-header">
+    <span class="job-tag">Product</span>
+    <h3>Senior Product Manager, Cloud Security Solutions</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>San Francisco, CA (Remote)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead our cloud security product line, developing strategies and features that protect modern cloud environments while enabling business agility for our enterprise customers.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Own the strategic direction for our cloud security product portfolio</li>
+        <li>Identify market opportunities and prioritize feature development</li>
+        <li>Partner with engineering, sales, and marketing to ensure successful product launches</li>
+        <li>Conduct competitive analysis and stay ahead of industry trends</li>
+        <li>Develop pricing strategies and business cases for new initiatives</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>6+ years of product management experience</li>
+        <li>Deep understanding of cloud platforms (AWS, Azure, GCP)</li>
+        <li>Experience with cloud security technologies and compliance frameworks</li>
+        <li>Strong analytical skills and data-driven decision making</li>
+        <li>Excellent leadership and stakeholder management capabilities</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $155,000 - $195,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Senior Product Manager, Cloud Security Solutions">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Director of Product Management -->
+<div class="job-card" data-category="product">
+  <div class="job-header">
+    <span class="job-tag">Product</span>
+    <h3>Director of Product Management, Security Operations</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Austin, TX (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead the product strategy for our Security Operations Center (SOC) solutions portfolio, including SIEM, SOAR, and XDR products, creating a unified vision that drives growth and customer success.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop and execute long-term product strategy and vision</li>
+        <li>Lead and mentor a team of product managers</li>
+        <li>Drive product integration across our security portfolio</li>
+        <li>Work with executive leadership to align product direction with company strategy</li>
+        <li>Engage with key customers and partners to drive product adoption</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>8+ years of product management experience with 3+ years in leadership</li>
+        <li>Deep understanding of security operations and tooling</li>
+        <li>Track record of successful product launches in B2B/enterprise software</li>
+        <li>Strong business acumen and strategic thinking</li>
+        <li>Experience growing and developing product teams</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $180,000 - $230,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Director of Product Management, Security Operations">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Product Manager, API Security -->
+<div class="job-card" data-category="product">
+  <div class="job-header">
+    <span class="job-tag">Product</span>
+    <h3>Product Manager, API Security</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Atlanta, GA (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Own our API Security product line, building solutions that help organizations discover, secure, and monitor their API ecosystem against emerging threats.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Define the product strategy and roadmap for API security solutions</li>
+        <li>Collaborate with engineering to implement innovative security features</li>
+        <li>Work with customers to understand API security challenges</li>
+        <li>Create product requirements and user stories</li>
+        <li>Partner with marketing to position and promote the product</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>4+ years of product management experience</li>
+        <li>Understanding of API architectures, protocols, and security challenges</li>
+        <li>Experience with web application security, ideally API security</li>
+        <li>Strong technical background with ability to engage with developers</li>
+        <li>Excellent problem-solving and analytical thinking skills</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $135,000 - $165,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Product Manager, API Security">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Technical Product Manager -->
+<div class="job-card" data-category="product">
+  <div class="job-header">
+    <span class="job-tag">Product</span>
+    <h3>Technical Product Manager, Security Automation</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Denver, CO (Remote)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Drive the development of our security automation platform, creating tools that enable organizations to automate security tasks, response workflows, and compliance activities.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Define product requirements for automation capabilities</li>
+        <li>Work closely with engineering on technical implementation details</li>
+        <li>Create and maintain integration specifications with security tools</li>
+        <li>Develop and evangelize our automation ecosystem strategy</li>
+        <li>Engage with customers to understand automation challenges</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>5+ years of product management experience</li>
+        <li>Strong technical background, ideally with software development experience</li>
+        <li>Understanding of security operations and incident response workflows</li>
+        <li>Experience with APIs, webhooks, and integration technologies</li>
+        <li>Familiarity with SOAR, IaC, or DevSecOps practices</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $140,000 - $175,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Technical Product Manager, Security Automation">Apply Now</button>
+    </div>
+  </div>
+</div>
+
       <!-- Product Manager -->
       <div class="job-card" data-category="product">
         <div class="job-header">
@@ -787,6 +1251,1571 @@ nav ul {
         </div>
       </div>
 
+      <!-- Cryptography Researcher -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Cryptography Researcher</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Zurich, Switzerland (Onsite)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Research and develop next-generation cryptographic protocols and algorithms for our secure communications platform, focusing on post-quantum cryptography solutions.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design and analyze cryptographic primitives and protocols</li>
+        <li>Conduct security proofs and cryptanalysis</li>
+        <li>Implement and test cryptographic algorithms</li>
+        <li>Collaborate with engineering teams to integrate secure solutions</li>
+        <li>Stay current with advances in quantum computing threats</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Mathematics, Computer Science, or related field</li>
+        <li>Strong background in cryptographic theory and practice</li>
+        <li>Experience with post-quantum cryptography algorithms</li>
+        <li>Knowledge of zero-knowledge proofs and secure multiparty computation</li>
+        <li>Publication record in top cryptography conferences (CRYPTO, EUROCRYPT)</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $140,000 - $180,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Cryptography Researcher">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+      <!-- Senior Data Scientist -->
+<div class="job-card" data-category="data-science">
+  <div class="job-header">
+    <span class="job-tag">Data Science</span>
+    <h3>Senior Data Scientist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Chicago, IL (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead data science initiatives to extract actionable insights from complex datasets, develop predictive models, and drive data-informed business decisions across multiple departments.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design and implement advanced statistical models and machine learning algorithms</li>
+        <li>Transform large, complex datasets into actionable business insights</li>
+        <li>Develop experimental frameworks for A/B testing and causal inference</li>
+        <li>Collaborate with product and engineering teams to implement data-driven solutions</li>
+        <li>Mentor junior data scientists and establish best practices</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Statistics, Mathematics, Computer Science, or related field</li>
+        <li>5+ years experience in applied data science</li>
+        <li>Expert knowledge of statistical analysis and machine learning techniques</li>
+        <li>Proficiency in Python, R, and SQL</li>
+        <li>Experience with big data technologies (Spark, Hadoop)</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $140,000 - $180,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Senior Data Scientist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Healthcare Data Scientist -->
+<div class="job-card" data-category="data-science">
+  <div class="job-header">
+    <span class="job-tag">Data Science</span>
+    <h3>Healthcare Data Scientist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Boston, MA (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Apply data science techniques to healthcare data to improve patient outcomes, optimize clinical operations, and develop predictive models for disease progression and treatment efficacy.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Analyze electronic health records and clinical data to identify patterns and trends</li>
+        <li>Develop predictive models for patient risk stratification</li>
+        <li>Create visualizations and dashboards for clinical decision support</li>
+        <li>Design natural language processing solutions for medical text analysis</li>
+        <li>Collaborate with medical professionals to validate findings</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Data Science, Biostatistics, or related field</li>
+        <li>3+ years experience in healthcare analytics</li>
+        <li>Knowledge of healthcare data standards (FHIR, HL7)</li>
+        <li>Experience with statistical analysis and survival modeling</li>
+        <li>Understanding of healthcare privacy regulations (HIPAA)</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $160,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Healthcare Data Scientist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Financial Data Scientist -->
+<div class="job-card" data-category="data-science">
+  <div class="job-header">
+    <span class="job-tag">Data Science</span>
+    <h3>Financial Data Scientist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>New York, NY (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Develop quantitative models and algorithms to analyze financial markets, optimize investment strategies, and automate risk assessment processes for our asset management division.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Build predictive models for market behavior and asset price movements</li>
+        <li>Develop algorithms for portfolio optimization and risk management</li>
+        <li>Create time series models for financial forecasting</li>
+        <li>Implement natural language processing for financial news analysis</li>
+        <li>Design anomaly detection systems for fraud prevention</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Quantitative Finance, Statistics, or related field</li>
+        <li>4+ years experience in financial data analysis</li>
+        <li>Strong understanding of financial markets and instruments</li>
+        <li>Experience with time series analysis and econometric modeling</li>
+        <li>Proficiency in Python and financial data APIs</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Financial Data Scientist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Data Science Team Lead -->
+<div class="job-card" data-category="data-science">
+  <div class="job-header">
+    <span class="job-tag">Data Science</span>
+    <h3>Data Science Team Lead</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Austin, TX (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead a team of data scientists in developing innovative data products, implementing machine learning solutions, and driving business impact through advanced analytics.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Manage a team of 5-7 data scientists, providing technical guidance and mentorship</li>
+        <li>Define data science strategy aligned with business objectives</li>
+        <li>Oversee the development and deployment of machine learning models</li>
+        <li>Collaborate with cross-functional stakeholders to identify opportunities</li>
+        <li>Establish best practices for data science workflow and model governance</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Computer Science, Statistics, or related field</li>
+        <li>7+ years experience in data science with 2+ years in leadership</li>
+        <li>Strong technical background in machine learning and statistical modeling</li>
+        <li>Experience with MLOps and deploying models to production</li>
+        <li>Excellent communication and stakeholder management skills</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $160,000 - $200,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Data Science Team Lead">Apply Now</button>
+    </div>
+  </div>
+</div>
+<!-- Business Development Manager -->
+<div class="job-card" data-category="business">
+  <div class="job-header">
+    <span class="job-tag">Business</span>
+    <h3>Business Development Manager, Financial Services</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>New York, NY (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Drive our business growth in the financial services sector by developing and executing strategic plans to acquire new customers and expand relationships with existing clients.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Identify and pursue new business opportunities in the financial services sector</li>
+        <li>Build and maintain relationships with key decision-makers at target organizations</li>
+        <li>Collaborate with product and marketing teams to develop tailored value propositions</li>
+        <li>Negotiate complex enterprise deals and manage the sales cycle</li>
+        <li>Stay informed on financial sector security regulations and compliance requirements</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>5+ years of business development or enterprise sales experience</li>
+        <li>Proven track record selling cybersecurity solutions to financial institutions</li>
+        <li>Understanding of financial services security needs and compliance challenges</li>
+        <li>Strong relationship-building and negotiation skills</li>
+        <li>Bachelor's degree in Business, Finance, or related field</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $170,000 / year + Commission
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Business Development Manager, Financial Services">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Strategic Partnerships Director -->
+<div class="job-card" data-category="business">
+  <div class="job-header">
+    <span class="job-tag">Business</span>
+    <h3>Director of Strategic Partnerships</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Chicago, IL (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead our partnership strategy to build a robust ecosystem of technology integrations, channel partners, and strategic alliances that enhance our cybersecurity offerings and expand our market reach.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop and execute our global partnership strategy</li>
+        <li>Identify and secure partnerships with complementary technology providers</li>
+        <li>Build and manage relationships with system integrators and MSPs</li>
+        <li>Create joint go-to-market strategies with key partners</li>
+        <li>Establish partner success metrics and drive partner-sourced revenue growth</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>7+ years of experience in partnership development or channel management</li>
+        <li>Track record of building successful technology partnerships</li>
+        <li>Experience in cybersecurity or enterprise software industry</li>
+        <li>Strong business acumen and strategic thinking</li>
+        <li>Excellent relationship management and negotiation skills</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Director of Strategic Partnerships">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Security Solutions Consultant -->
+<div class="job-card" data-category="business">
+  <div class="job-header">
+    <span class="job-tag">Business</span>
+    <h3>Security Solutions Consultant</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Dallas, TX (Remote)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Bridge the gap between our technical solutions and customer business needs by providing expert security guidance, conducting product demonstrations, and developing tailored security solutions.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Conduct technical discovery with prospects to understand security challenges</li>
+        <li>Deliver compelling product demonstrations and proof of concepts</li>
+        <li>Develop tailored security solutions that address specific customer needs</li>
+        <li>Support the sales team throughout the customer acquisition process</li>
+        <li>Stay current on industry trends, threat landscape, and competitive offerings</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>4+ years of experience in cybersecurity consulting or pre-sales engineering</li>
+        <li>Strong technical knowledge of security concepts and technologies</li>
+        <li>Excellent presentation and communication skills</li>
+        <li>Ability to translate complex technical concepts for diverse audiences</li>
+        <li>Security certifications (CISSP, CISM, or similar) preferred</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $120,000 - $150,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Security Solutions Consultant">Apply Now</button>
+    </div>
+  </div>
+</div>
+<!-- NLP Data Scientist -->
+<div class="job-card" data-category="data-science">
+  <div class="job-header">
+    <span class="job-tag">Data Science</span>
+    <h3>NLP Data Scientist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Seattle, WA (Remote)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Develop and implement natural language processing solutions to extract insights from unstructured text data, enhance our content recommendation engine, and improve user experience.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Build and deploy NLP models for text classification, entity recognition, and sentiment analysis</li>
+        <li>Develop information retrieval systems and semantic search capabilities</li>
+        <li>Create topic modeling solutions for content categorization</li>
+        <li>Implement text summarization and content generation models</li>
+        <li>Collaborate with engineering teams to integrate NLP solutions into products</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Computational Linguistics, Computer Science, or related field</li>
+        <li>3+ years experience in applied NLP</li>
+        <li>Strong knowledge of modern NLP techniques and transformer architectures</li>
+        <li>Experience with language modeling and fine-tuning approaches</li>
+        <li>Proficiency in Python and NLP libraries (spaCy, Hugging Face)</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $135,000 - $175,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="NLP Data Scientist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cryptographic Protocol Engineer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Cryptographic Protocol Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>San Francisco, CA (Remote)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design and implement secure cryptographic protocols for our blockchain infrastructure, ensuring high security standards while maintaining optimal performance.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop cryptographic protocols for distributed ledger technologies</li>
+        <li>Implement secure key management solutions</li>
+        <li>Perform security reviews of existing protocols</li>
+        <li>Design privacy-preserving cryptographic systems</li>
+        <li>Create technical documentation for implemented solutions</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MSc or PhD in Computer Science or Mathematics</li>
+        <li>5+ years experience implementing cryptographic systems</li>
+        <li>Strong knowledge of elliptic curve cryptography</li>
+        <li>Experience with secure multi-party computation</li>
+        <li>Proficiency in Rust, C++, or similar languages</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Cryptographic Protocol Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Research Scientist -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>AI Research Scientist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Cambridge, MA (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Conduct cutting-edge research in machine learning and artificial intelligence, with a focus on developing novel generative models and foundation models.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design and implement new deep learning architectures</li>
+        <li>Develop techniques for improving model efficiency and performance</li>
+        <li>Publish research at top AI conferences (NeurIPS, ICML, ICLR)</li>
+        <li>Collaborate with engineering teams to transition research to products</li>
+        <li>Mentor junior researchers and interns</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Computer Science, Machine Learning, or related field</li>
+        <li>Strong publication record in machine learning or AI</li>
+        <li>Deep expertise in transformer architectures and large language models</li>
+        <li>Proficiency in PyTorch or TensorFlow</li>
+        <li>Experience with distributed training systems</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $170,000 - $220,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="AI Research Scientist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quantum Cryptography Specialist -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Quantum Cryptography Specialist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Tokyo, Japan (Onsite)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead our quantum-resistant cryptography initiatives, developing cryptographic systems secure against attacks from both classical and quantum computers.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Research and implement post-quantum cryptographic algorithms</li>
+        <li>Develop quantum key distribution protocols</li>
+        <li>Evaluate security of existing cryptographic implementations</li>
+        <li>Create transition strategies for quantum-safe cryptography</li>
+        <li>Collaborate with hardware teams on quantum-resistant implementations</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Physics, Mathematics, or Computer Science</li>
+        <li>Deep understanding of quantum computing principles</li>
+        <li>Experience with lattice-based, hash-based, or multivariate cryptography</li>
+        <li>Knowledge of NIST PQC standardization efforts</li>
+        <li>Strong programming skills in C++, Python, or similar languages</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $160,000 - $200,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Quantum Cryptography Specialist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- ML Operations Engineer -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>ML Operations Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Seattle, WA (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Build and maintain scalable infrastructure for machine learning model training, deployment, and monitoring in production environments.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design and implement ML infrastructure and pipelines</li>
+        <li>Optimize model deployment for production environments</li>
+        <li>Build systems for model versioning and reproducibility</li>
+        <li>Implement monitoring and alerting for ML systems</li>
+        <li>Collaborate with data scientists to streamline model deployment</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>BS/MS in Computer Science or related field</li>
+        <li>3+ years experience in DevOps or ML engineering</li>
+        <li>Strong knowledge of Kubernetes, Docker, and cloud platforms</li>
+        <li>Experience with ML frameworks (TensorFlow, PyTorch)</li>
+        <li>Proficiency in Python and CI/CD pipelines</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $160,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="ML Operations Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cryptographic Hardware Engineer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Cryptographic Hardware Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Austin, TX (Onsite)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design and develop secure hardware solutions for cryptographic applications, focusing on side-channel attack resistance and hardware security modules.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design secure hardware for cryptographic operations</li>
+        <li>Implement countermeasures against side-channel attacks</li>
+        <li>Develop secure boot and key management solutions</li>
+        <li>Conduct security evaluations of hardware implementations</li>
+        <li>Collaborate with software teams on hardware-software integration</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Electrical Engineering or Computer Engineering</li>
+        <li>5+ years experience in hardware security</li>
+        <li>Expertise in FPGA or ASIC design</li>
+        <li>Knowledge of side-channel analysis techniques</li>
+        <li>Experience with hardware description languages (VHDL, Verilog)</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $140,000 - $180,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Cryptographic Hardware Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Ethics Researcher -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>AI Ethics Researcher</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Remote (Global)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead research on ethical AI development, focusing on fairness, accountability, transparency, and safety in AI systems deployed at scale.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop frameworks for ethical assessment of AI systems</li>
+        <li>Research methods for detecting and mitigating bias in models</li>
+        <li>Create governance processes for responsible AI deployment</li>
+        <li>Collaborate with product teams on implementing ethical guidelines</li>
+        <li>Represent the company in AI ethics forums and conferences</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Computer Science, Philosophy, Ethics, or related field</li>
+        <li>Research experience in AI ethics or fairness</li>
+        <li>Understanding of machine learning algorithms and bias metrics</li>
+        <li>Excellent communication and policy formulation skills</li>
+        <li>Experience with interdisciplinary research</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $170,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="AI Ethics Researcher">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Applied Cryptographer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Applied Cryptographer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>London, UK (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design and implement practical cryptographic solutions for our financial services platform, with a focus on privacy-preserving technologies and secure transactions.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Implement cryptographic libraries and protocols</li>
+        <li>Design secure payment and authentication systems</li>
+        <li>Perform security reviews of cryptographic implementations</li>
+        <li>Develop privacy-enhancing technologies</li>
+        <li>Create technical specifications for cryptographic systems</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MSc or PhD in Computer Science, Mathematics, or related field</li>
+        <li>4+ years experience in applied cryptography</li>
+        <li>Deep knowledge of public key infrastructure</li>
+        <li>Experience with homomorphic encryption or secure MPC</li>
+        <li>Strong programming skills in C/C++, Rust, or Go</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $170,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Applied Cryptographer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Computer Vision Engineer -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>Computer Vision Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Munich, Germany (Onsite)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Develop advanced computer vision algorithms for our autonomous driving platform, focusing on object detection, tracking, and scene understanding.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design and implement computer vision algorithms</li>
+        <li>Optimize models for edge computing devices</li>
+        <li>Develop data augmentation and synthesis techniques</li>
+        <li>Create evaluation frameworks for vision systems</li>
+        <li>Collaborate with hardware teams on sensor integration</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Computer Vision, Machine Learning, or related field</li>
+        <li>3+ years experience in computer vision development</li>
+        <li>Strong knowledge of CNN architectures and vision transformers</li>
+        <li>Experience with PyTorch, TensorFlow, or similar frameworks</li>
+        <li>Familiarity with 3D vision and sensor fusion</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $120,000 - $160,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Computer Vision Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Blockchain Cryptography Engineer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Blockchain Cryptography Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Singapore (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design and implement cryptographic protocols for our layer-2 blockchain solution, focusing on zero-knowledge proofs and efficient transaction verification.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop zero-knowledge proof systems for privacy-preserving transactions</li>
+        <li>Implement efficient signature schemes and consensus mechanisms</li>
+        <li>Design secure smart contract protocols</li>
+        <li>Conduct security audits of cryptographic implementations</li>
+        <li>Research scalable cryptographic solutions for blockchain</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MSc or PhD in Computer Science, Mathematics, or related field</li>
+        <li>Experience with zero-knowledge proofs (zk-SNARKs, zk-STARKs)</li>
+        <li>Knowledge of elliptic curve cryptography</li>
+        <li>Familiarity with blockchain consensus mechanisms</li>
+        <li>Proficiency in Rust, Solidity, or similar languages</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Blockchain Cryptography Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Prompt Engineer -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>AI Prompt Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>New York, NY (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design, develop, and optimize prompts and interactions for our AI assistant products, ensuring high quality, safe, and effective user experiences.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Create and refine prompts for various use cases and domains</li>
+        <li>Develop strategies to mitigate biases and harmful outputs</li>
+        <li>Design conversational flows and interaction patterns</li>
+        <li>Evaluate and benchmark prompt performance</li>
+        <li>Collaborate with product and safety teams on AI experience design</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>Bachelor's degree in Linguistics, Computer Science, or related field</li>
+        <li>2+ years experience working with large language models</li>
+        <li>Strong writing and communication skills</li>
+        <li>Understanding of AI capabilities and limitations</li>
+        <li>Experience with prompt engineering techniques and best practices</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $120,000 - $150,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="AI Prompt Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cryptography Educator -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Cryptography Educator</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Remote (US)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Develop and deliver cryptography training programs for our clients and internal teams, translating complex cryptographic concepts into accessible learning materials.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Create educational content on cryptography principles and applications</li>
+        <li>Develop hands-on workshops and training exercises</li>
+        <li>Design assessment methods for cryptography skills</li>
+        <li>Keep course materials updated with latest cryptographic developments</li>
+        <li>Deliver virtual and in-person training sessions</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>Advanced degree in Computer Science, Mathematics, or related field</li>
+        <li>Strong background in applied cryptography</li>
+        <li>Excellent communication and teaching skills</li>
+        <li>Experience developing technical training materials</li>
+        <li>Ability to explain complex concepts to diverse audiences</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $100,000 - $130,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Cryptography Educator">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- NLP Research Scientist -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>NLP Research Scientist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Toronto, Canada (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Conduct cutting-edge research in natural language processing, focusing on advancing foundational models for language understanding and generation.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop novel architectures for language modeling</li>
+        <li>Research methods for improving model efficiency and reasoning</li>
+        <li>Design techniques for evaluating language model capabilities</li>
+        <li>Publish research at top NLP conferences</li>
+        <li>Collaborate with product teams on research applications</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Computer Science, Computational Linguistics, or related field</li>
+        <li>Strong publication record in NLP or machine learning</li>
+        <li>Experience with transformer architectures and large language models</li>
+        <li>Expertise in PyTorch or TensorFlow</li>
+        <li>Knowledge of multilingual NLP and cross-lingual transfer</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $160,000 - $210,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="NLP Research Scientist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Secure Messaging Protocol Engineer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Secure Messaging Protocol Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Berlin, Germany (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design and implement secure messaging protocols for our privacy-focused communication platform, ensuring strong end-to-end encryption and forward secrecy.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop and optimize secure messaging protocols</li>
+        <li>Implement end-to-end encryption for various communication channels</li>
+        <li>Design key exchange and management systems</li>
+        <li>Conduct security analysis of protocol implementations</li>
+        <li>Create specifications and documentation for implemented protocols</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MSc or PhD in Computer Science, Information Security, or related field</li>
+        <li>Experience with secure messaging protocols (Signal, Matrix)</li>
+        <li>Strong understanding of authenticated encryption</li>
+        <li>Knowledge of deniability and forward secrecy concepts</li>
+        <li>Proficiency in C++, Rust, or similar systems programming languages</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $170,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Secure Messaging Protocol Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reinforcement Learning Engineer -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>Reinforcement Learning Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Montreal, Canada (Onsite)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Develop reinforcement learning algorithms and systems for robotics applications, focusing on sample-efficient learning and real-world deployment.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design and implement reinforcement learning algorithms</li>
+        <li>Create simulation environments for training and evaluation</li>
+        <li>Develop methods for sim-to-real transfer</li>
+        <li>Build systems for safe exploration in reinforcement learning</li>
+        <li>Implement multi-agent reinforcement learning algorithms</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Machine Learning, Robotics, or related field</li>
+        <li>Strong understanding of reinforcement learning theory</li>
+        <li>Experience with RL frameworks (Stable Baselines, RLlib)</li>
+        <li>Proficiency in Python and PyTorch or TensorFlow</li>
+        <li>Knowledge of robotics simulation environments</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $140,000 - $180,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Reinforcement Learning Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Homomorphic Encryption Specialist -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Homomorphic Encryption Specialist</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Paris, France (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Research and implement homomorphic encryption techniques for our secure cloud computing platform, enabling computation on encrypted data without revealing sensitive information.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop practical homomorphic encryption implementations</li>
+        <li>Optimize performance of encryption schemes</li>
+        <li>Design secure protocols for privacy-preserving computation</li>
+        <li>Implement applications using FHE/PHE libraries</li>
+        <li>Contribute to open-source FHE projects and standards</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Cryptography, Computer Science, or Mathematics</li>
+        <li>Experience with homomorphic encryption libraries (SEAL, HElib)</li>
+        <li>Strong understanding of lattice-based cryptography</li>
+        <li>Knowledge of privacy-preserving machine learning</li>
+        <li>Proficiency in C++, Rust, or similar languages</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Homomorphic Encryption Specialist">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Safety Researcher -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>AI Safety Researcher</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Oxford, UK (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Research methods for ensuring the safety and alignment of advanced AI systems, focusing on interpretability, robustness, and value alignment.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop techniques for AI interpretability and transparency</li>
+        <li>Research methods for robustness against adversarial attacks</li>
+        <li>Design alignment techniques for language models</li>
+        <li>Create evaluation frameworks for AI safety</li>
+        <li>Publish research at relevant conferences and workshops</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Computer Science, Machine Learning, or related field</li>
+        <li>Research experience in AI safety, robustness, or alignment</li>
+        <li>Strong understanding of deep learning architectures</li>
+        <li>Experience with interpretability techniques</li>
+        <li>Knowledge of causal reasoning and formal verification</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="AI Safety Researcher">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cryptographic Protocol Auditor -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Cryptographic Protocol Auditor</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Tel Aviv, Israel (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Conduct security audits of cryptographic implementations and protocols for our clients, identifying vulnerabilities and providing recommendations for secure implementations.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Perform security audits of cryptographic code and protocols</li>
+        <li>Identify vulnerabilities in cryptographic implementations</li>
+        <li>Use formal verification tools for protocol analysis</li>
+        <li>Provide guidance for remediation of security issues</li>
+        <li>Create detailed audit reports for clients</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MSc or PhD in Computer Science, Information Security, or related field</li>
+        <li>5+ years experience in cryptographic security auditing</li>
+        <li>Strong knowledge of applied cryptography</li>
+        <li>Experience with formal verification tools</li>
+        <li>Familiarity with common cryptographic vulnerabilities</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $140,000 - $180,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Cryptographic Protocol Auditor">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Model Alignment Engineer -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>AI Model Alignment Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>San Francisco, CA (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Develop and implement techniques to align large language models with human values, focusing on reducing harmful outputs and improving model helpfulness.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Design and implement alignment techniques for LLMs</li>
+        <li>Develop evaluation methods for model safety</li>
+        <li>Create datasets for RLHF and other alignment approaches</li>
+        <li>Implement red-teaming methods for robustness testing</li>
+        <li>Collaborate with research teams on advancing alignment methods</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MS or PhD in Machine Learning, Computer Science, or related field</li>
+        <li>Experience with large language model training and fine-tuning</li>
+        <li>Understanding of RLHF, DPO, and other alignment techniques</li>
+        <li>Strong programming skills in PyTorch or JAX</li>
+        <li>Knowledge of responsible AI principles</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="AI Model Alignment Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Zero-Knowledge Proof Engineer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Zero-Knowledge Proof Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Amsterdam, Netherlands (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design and implement efficient zero-knowledge proof systems for our blockchain privacy layer, enabling verifiable computation while preserving user privacy.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop zk-SNARK/zk-STARK implementations for privacy applications</li>
+        <li>Optimize proof generation and verification performance</li>
+        <li>Design circuits for complex cryptographic applications</li>
+        <li>Implement privacy-preserving smart contracts</li>
+        <li>Research and implement new ZKP schemes and optimizations</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MSc or PhD in Computer Science, Mathematics, or related field</li>
+        <li>Experience with ZKP libraries (circom, gnark, halo2)</li>
+        <li>Strong understanding of finite field arithmetic</li>
+        <li>Knowledge of elliptic curve cryptography</li>
+        <li>Proficiency in Rust, Go, or C++</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Zero-Knowledge Proof Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Multimodal AI Researcher -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>Multimodal AI Researcher</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Palo Alto, CA (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Conduct cutting-edge research in multimodal AI systems that can understand and generate content across text, images, video, and audio modalities.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop architectures for multimodal understanding and generation</li>
+        <li>Research techniques for cross-modal alignment and transfer</li>
+        <li>Design evaluation methodologies for multimodal systems</li>
+        <li>Publish research at top conferences (NeurIPS, CVPR, ICLR)</li>
+        <li>Collaborate with product teams on multimodal applications</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>PhD in Computer Science, Machine Learning, or related field</li>
+        <li>Strong publication record in multimodal AI</li>
+        <li>Experience with vision-language models or audio-visual models</li>
+        <li>Expertise in PyTorch or JAX</li>
+        <li>Knowledge of generative modeling techniques</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $170,000 - $220,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Multimodal AI Researcher">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Cryptographic Library Developer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Cryptographic Library Developer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Portland, OR (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design, implement, and maintain high-performance cryptographic libraries, ensuring efficiency, security, and resistance against side-channel attacks.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Develop cryptographic primitives and protocols in systems languages</li>
+        <li>Optimize implementations for speed and security</li>
+        <li>Implement constant-time algorithms resistant to timing attacks</li>
+        <li>Create comprehensive test suites and benchmarks</li>
+        <li>Maintain documentation and API specifications</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>BS or MS in Computer Science or related field</li>
+        <li>5+ years experience in cryptographic engineering</li>
+        <li>Expert knowledge of C, C++, or Rust programming</li>
+        <li>Understanding of side-channel attack vectors</li>
+        <li>Experience with TLS, X.509, or similar protocols</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $130,000 - $170,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Cryptographic Library Developer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI Infrastructure Engineer -->
+<div class="job-card" data-category="ai">
+  <div class="job-header">
+    <span class="job-tag">AI</span>
+    <h3>AI Infrastructure Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Dublin, Ireland (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Design and build high-performance computing infrastructure for training and serving large-scale AI models, focusing on scalability, reliability, and efficiency.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Architect distributed training systems for large AI models</li>
+        <li>Implement efficient model serving infrastructure</li>
+        <li>Optimize hardware utilization and power efficiency</li>
+        <li>Design monitoring and observability solutions for AI systems</li>
+        <li>Build tools for data parallelism, model parallelism, and pipeline parallelism</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>BS or MS in Computer Science or related field</li>
+        <li>5+ years experience in systems or infrastructure engineering</li>
+        <li>Strong knowledge of distributed systems</li>
+        <li>Experience with GPU computing and optimization</li>
+        <li>Familiarity with machine learning frameworks (PyTorch, TensorFlow)</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $140,000 - $180,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="AI Infrastructure Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Post-Quantum Cryptography Engineer -->
+<div class="job-card" data-category="cryptography">
+  <div class="job-header">
+    <span class="job-tag">Cryptography</span>
+    <h3>Post-Quantum Cryptography Engineer</h3>
+    <div class="job-meta">
+      <div>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Washington DC (Hybrid)</span>
+      </div>
+      <div>
+        <i class="fas fa-briefcase"></i>
+        <span>Full-time</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-body">
+    <div class="job-highlights">
+      <h4>Role Overview</h4>
+      <p class="job-description">
+        Lead our transition to post-quantum cryptography, implementing and evaluating quantum-resistant algorithms for our security-critical infrastructure.
+      </p>
+      <h4>Key Responsibilities</h4>
+      <ul>
+        <li>Implement NIST-standardized post-quantum algorithms</li>
+        <li>Design hybrid cryptographic solutions for transition period</li>
+        <li>Evaluate performance and security of PQC implementations</li>
+        <li>Develop migration strategies for existing systems</li>
+        <li>Create tools for testing PQC algorithm implementations</li>
+      </ul>
+      <h4>Requirements</h4>
+      <ul>
+        <li>MSc or PhD in Cryptography, Mathematics, or Computer Science</li>
+        <li>Experience with lattice-based, hash-based, or code-based cryptography</li>
+        <li>Knowledge of NIST PQC standardization process</li>
+        <li>Strong programming skills in C/C++ or Rust</li>
+        <li>Understanding of hardware acceleration for cryptography</li>
+      </ul>
+    </div>
+    <div class="salary-range">
+      <i class="fas fa-dollar-sign"></i>
+      Salary Range: $150,000 - $190,000 / year
+    </div>
+    <div class="job-btn-container">
+      <button class="apply-btn" data-job="Post-Quantum Cryptography Engineer">Apply Now</button>
+    </div>
+  </div>
+</div>
       <!-- Sales Engineer -->
       <div class="job-card" data-category="business security">
         <div class="job-header">
@@ -838,48 +2867,62 @@ nav ul {
       </div>
     </div>
 
+
     <div id="application-form" class="application-form-section">
       <h2>Apply for a Position</h2>
       <form class="application-form" id="job-application-form">
+<!--  <div class="form-group">-->
+<!--    <label for="job-title">Position</label>-->
+<!--    <input type="text" id="job-title" class="form-control" value="Security Analyst" required readonly>-->
+<!--  </div>-->
+
         <div class="form-group">
-          <label for="job-title">Position</label>
-          <input type="text" id="job-title" class="form-control" readonly>
-        </div>
-        <div class="form-group">
-          <label for="full-name">Full Name *</label>
-          <input type="text" id="full-name" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" class="form-control" required>
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="linkedin">LinkedIn Profile URL</label>
-          <input type="url" id="linkedin" class="form-control">
-        </div>
-        <div class="form-group">
-          <label for="message">Cover Letter / Additional Information</label>
-          <textarea id="message" class="form-control" rows="5"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="resume">Resume/CV (Coming Soon)</label>
-          <input type="file" id="resume" class="form-control" disabled>
-          <small style="display: block; margin-top: 0.5rem; color: #718096;">Attachment functionality will be available soon. Please include your resume link in your additional information.</small>
-        </div>
-        <button type="submit" class="form-submit">Submit Application</button>
-      </form>
+  <label for="job-title">Position *</label>
+  <input
+    type="text"
+    id="job-title"
+    class="form-control"
+    placeholder="Select a job above"
+    readonly
+    required
+  >
+</div>
+
+
+
+
+  <div class="form-group">
+    <label for="full-name">Full Name *</label>
+    <input type="text" id="full-name" class="form-control" required>
+  </div>
+  <div class="form-group">
+    <label for="email">Email Address *</label>
+    <input type="email" id="email" class="form-control" required>
+  </div>
+<div class="form-group">
+  <label for="message">Why are you the one we should hire next? *</label>
+  <textarea id="message" class="form-control" rows="5" maxlength="500" required oninput="updateCharCount()"></textarea>
+  <small id="char-count" style="display: block; margin-top: 5px;">0 / 512 characters</small>
+</div>
+  <button type="submit" class="form-submit">Submit Application</button>
+
+  <div class="form-group alternative-application" style="margin-top: 2rem;">
+    <label style="font-weight: bold;">Alternative Application Method</label>
+<p>If you encounter issues with the form, you may apply via email by sending the required details to <a href="mailto:careers@sha2.org">careers@sha2.org</a>.</p>
+<br>
+<p>All applications go through an initial automated screening. Qualified submissions are then reviewed thoroughly by our hiring team. We aim to respond to shortlisted candidates within 2 business days.</p>
+
     </div>
+  </div>
+</form>
+  </div>
   </div>
 
   <footer>
       <div class="footer-content">
         <div class="footer-col">
           <div class="logo" style="color: white; margin-bottom: 1rem;">SHA<span>2</span></div>
-          <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Protecting Tomorrow - Today.</p>
+          <p style="color: #b3c5ef; margin-bottom: 1.5rem;">Securing Tomorrow - Today.</p>
 
         </div>
 
@@ -891,6 +2934,7 @@ nav ul {
             <li><a href="./solutions.html#cloud-security">Cloud Security</a></li>
             <li><a href="./solutions.html#identity-management">Identity Management</a></li>
             <li><a href="./solutions.html#network-security">Network Security</a></li>
+            <li><a href="#compliance-regulatory">Compliance & Regulatory Solutions</a></li>
           </ul>
         </div>
 
@@ -906,11 +2950,18 @@ nav ul {
       </div>
 
       <div class="copyright">
-        © <span id="year"></span> SHA2: Protecting Tomorrow - Today. All rights reserved.
+        © <span id="year"></span> SHA2: Securing Tomorrow - Today. All rights reserved.
       </div>
     </footer>
 
   <script>
+
+      function updateCharCount() {
+    const message = document.getElementById("message");
+    const count = document.getElementById("char-count");
+    count.textContent = `${message.value.length} / 512 characters`;
+  }
+
     // Network canvas visualization
     const canvas = document.getElementById('network-canvas');
   const ctx = canvas.getContext('2d');
