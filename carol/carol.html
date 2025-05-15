@@ -344,6 +344,12 @@ showCursorAfterDelay();
 
     await typeText(p, selectedText);
 
+    // Add blinking cursor after text is fully typed
+    const cursor = document.createElement("span");
+    cursor.className = "blink";
+    cursor.textContent = "█";
+    p.appendChild(cursor);
+
     for (const opt of node.options) {
         const decryptedOption = await decryptText(opt.text, password);
         const btn = document.createElement("button");
