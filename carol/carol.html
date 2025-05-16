@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>C.A.R.O.L.</title>
     <style>
-.bg-img {
+.bg-img {{
     position: absolute;
     top: 50%;
     width: 25vw;
@@ -12,18 +12,18 @@
     transform: translateY(-50%);
     z-index: -1;
     pointer-events: none;
-}
+}}
 
-#left-img {
+#left-img {{
     left: 1.5vw; /* centers 25vw-wide image in left half (0–50vw) */
-}
+}}
 
-#right-img {
+#right-img {{
     right: 1.5vw; /* centers 25vw-wide image in right half (50–100vw) */
     transform: translateY(-50%) scaleX(-1);
-}
+}}
 
-        body {
+        body {{
             background-color: black;
             color: #66ff66;
             font-family: 'Courier New', monospace;
@@ -36,8 +36,8 @@
             margin: 0;
             flex-direction: column;
             overflow: hidden;
-        }
-        #password {
+        }}
+        #password {{
             border: none;
             background: none;
             color: #66ff66;
@@ -46,8 +46,8 @@
             caret-color: #66ff66;
             font-family: 'Courier New', monospace;
             text-align: left;
-        }
-        button {
+        }}
+        button {{
             margin: 10px;
             padding: 10px 20px;
             font-size: 20px;
@@ -56,30 +56,30 @@
             background: transparent;
             border: 1px solid #66ff66;
             cursor: pointer;
-        }
-        button:hover {
+        }}
+        button:hover {{
             background-color: #66ff66;
             color: black;
-        }
-        #conversation {
+        }}
+        #conversation {{
             display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-        #textContainer {
+        }}
+        #textContainer {{
             min-height: 60px;
             max-width: 85vw;
             margin: 0 auto;
             word-wrap: break-word;
             white-space: pre-wrap;
             text-align: left;
-        }
-        #buttonContainer {
+        }}
+        #buttonContainer {{
             min-height: 120px;
             margin-top: 20px;
-        }
-        #loadingScreen {
+        }}
+        #loadingScreen {{
             font-size: 18px;
             color: #66ff66;
             line-height: 1.5;
@@ -95,28 +95,28 @@
             overflow-y: scroll;
             scrollbar-width: none;
             -ms-overflow-style: none;
-        }
-        #loadingScreen::-webkit-scrollbar {
+        }}
+        #loadingScreen::-webkit-scrollbar {{
             width: 0px;
             background: transparent;
-        }
-        .blink {
+        }}
+        .blink {{
             animation: blink 1s step-end infinite;
             color: #66ff66;
-        }
-        @keyframes blink {
-            from, to { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        #cursorWrapper {
+        }}
+        @keyframes blink {{
+            from, to {{ opacity: 1; }}
+            50% {{ opacity: 0; }}
+        }}
+        #cursorWrapper {{
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 28px;
             color: #66ff66;
             margin-top: 10px;
-        }
-        #titleOverlay {
+        }}
+        #titleOverlay {{
             position: absolute;
             top: 20px;
             width: 100%;
@@ -130,7 +130,7 @@
             border-bottom: 2px solid #66ff66;
             padding-bottom: 8px;
             background-color: black;
-        }
+        }}
     </style>
 </head>
 <body>
@@ -147,73 +147,73 @@
     </div>
 
     <script>
-        const encryptedTree = {"0d4e430c024139d32e3da7660962d250f70f51a5d54cbd7800ca9f2320fdddae": {"options": [], "text": "WuUE40pIfJegOVZavl5JKRwtr3M5Id9FqnXBzYsRt6LXrrLFkN8kZkPPDBJizh/UqC9sbbH80YqQGBD6zGkt1g=="}, "18f6b0200b6fd32ce4e85b6c841f72247964195b8e1cd7c52e046dc51e48f779": {"options": [{"goto": "rik4geXuUB1FIsB2vA0yVRNaI/IoZrfqvMY3PYqbQaMb7katt0WrF4bZRdYYfYnR9ugZZ0bNhQOGcu87R9iaaifG4PcGNDuhl93cP3HtKShqDna3OBr6bKGPdfMQ4H7H", "text": "rUaKNGAhGaO8AcFxJP44ktVPNf0RfRLOv9K7XCS7wbkUVQFe0bgmtqSOIi2SNOv8"}, {"goto": "JZXr5SJqadTOEtwiPKt2BM+Nk6gVroL8ZTiG2c5SbuqdwgqB5Dsog2BLg7SeSTuHSOkQ5PmG28BrUrmRJ9nX+ks0WVsdrGzPyql2L/j/CdDMP9Chh6GGjhzQFDp3j2rO", "text": "swkbtmC2KG+/qiafEZxq936VChRtdKzvyCLkMItzNGnL0+0WXh8KO0z3/zDWgZAY"}], "text": "TD9yrOSiDUwqlYcKncvcymyknTWLUdmrE0TGmVWsFPGDMdRF1ql5EZnkTEyn+d5N+gIfktX+/NqgmXo6/Bu6gFMpXLhqjghFaunmYNfnn97Fk/bYU9gSzbAHHfZhqR8m"}, "2f5dd588f33afd497567ec0697ca4f2a4a24a942bfef8734f15b4c9307fa79ae": {"options": [], "text": "u2elfosEljfW4yG+8gUD+Bufq3gPRra18d/yU6Wxw3bOVpZTn2peaTu1gmkpazDv2UGSNPBjYQ+Xkn7LWcMfFQ=="}, "8a6b564d12b32d10f3d0f53600900a271508eb3c00108c67a74475c257cb4c9d": {"options": [{"goto": "8dkwuJhjsDS7cT1OHtXcr1YV+CHdyGS51mW+W+3KG38UGNaXgFDGYsi+rbKKaoZnhqEcJDMUMZ9HH4ADg+LPXn1Yl0vZ8lsQB6DGo/ZiHRFCHjreN9WDKS+HhvshRMpK", "text": "8PEGsJjZZYPZUMIF/mEQkoLWIA51w/idHfiS0wxQxH0eK/adEcUUSTreOXYJxJ13"}, {"goto": "BGmakjLRBW04BfkudQCP2opI4nHMHZYdWs/80hp4a16/WLOI6aGVP6M4ydvFigOpznuan+0bI3pWOjMexmlU+VCiBfpVexeBfbEMqWfrkAo4A7xVwdBPCNzeayibXSwP", "text": "LsAU9/c7e/g6z9El08puOSzdkXoD2PuLaB5nIRxmEBHGK54xh5XsIcbJIEvK/jfQ"}, {"goto": "d64T7FGFswRC7uMHM6kTrCQOT79MAlliYQFZ8LiHE1liqmcS58eLT7U5HzYQ4P/HoFJ4sHcczAdBO9IR3ivNU4N3AnnNOCAlijVG7434SfmoYg6CRL4NfmtbWFR+mtvu", "text": "f2rqRTgNlZlv5OPuwREPQAjHK73HiSbyqNS4R7FvK+BJmLViFDJWEyfW6V9XHKuB"}], "text": "12wKBoIIlK7FM/3+JgoDMxxiwnmeAjjbCSJhVAPJqAg8gy5CcvJ7lO26b9CIA8p9Ygv3h3yGLYOxNZ6nfzPBHA=="}};
+        const encryptedTree = {encrypted_tree_string};
 
-        async function decryptText(encryptedBase64, password) {
-            try {
+        async function decryptText(encryptedBase64, password) {{
+            try {{
                 const data = atob(encryptedBase64);
                 const iv = new Uint8Array([...data].slice(0, 16).map(c => c.charCodeAt(0)));
                 const ciphertext = new Uint8Array([...data].slice(16).map(c => c.charCodeAt(0)));
 
                 const enc = new TextEncoder();
                 const keyMaterial = await crypto.subtle.digest("SHA-256", enc.encode(password));
-                const key = await crypto.subtle.importKey("raw", keyMaterial, { name: "AES-CBC" }, false, ["decrypt"]);
+                const key = await crypto.subtle.importKey("raw", keyMaterial, {{ name: "AES-CBC" }}, false, ["decrypt"]);
 
-                const decrypted = await crypto.subtle.decrypt({ name: "AES-CBC", iv }, key, ciphertext);
+                const decrypted = await crypto.subtle.decrypt({{ name: "AES-CBC", iv }}, key, ciphertext);
                 return new TextDecoder().decode(decrypted).replace(/\\x00+$/, "");
-            } catch (e) {
+            }} catch (e) {{
                 showErrorPage();
                 throw new Error("Decryption failed");
-            }
-        }
+            }}
+        }}
 
-        function showErrorPage() {
+        function showErrorPage() {{
             document.body.innerHTML = "<h1 style='color:red;'>Error: Decryption Failed</h1><p style='color:white;'>Wrong password or corrupted data.</p>";
-        }
+        }}
 
-        function typeLine(message, callback, container) {
+        function typeLine(message, callback, container) {{
             const line = document.createElement("div");
             container.appendChild(line);
 
             let currentText = "";
             let messageIndex = 0;
 
-            function typeMessage() {
-                if (messageIndex < message.length) {
+            function typeMessage() {{
+                if (messageIndex < message.length) {{
                     currentText += message[messageIndex];
                     line.textContent = currentText;
                     container.scrollTop = container.scrollHeight;
                     messageIndex++;
                     setTimeout(typeMessage, 20);
-                } else {
+                }} else {{
                     setTimeout(callback, 123);
-                }
-            }
+                }}
+            }}
 
             typeMessage();
-        }
+        }}
 
 
-        function showLoadingScreen() {
+        function showLoadingScreen() {{
             playBackgroundAudio();
             const loadingScreen = document.createElement("div");
             loadingScreen.id = "loadingScreen";
             document.body.appendChild(loadingScreen);
 
-            const enc_load = "Ct6ybKWYt4fP/d3xH+Te0229vD8nN+T1rGjMG6gFMRvqtO4sLbD7dpc7RNk9PtQbB+9rRNL8Ur4Amt+19VSmAIo/lL5Rmr6V2DAQRieDyeU=";
+            const enc_load = "{enc_loading_messages}";
 
-            decryptText(enc_load, password).then((load) => {
+            decryptText(enc_load, password).then((load) => {{
                 load_list = JSON.parse(load)
                 let index = 0;
 
-                function next() {
-                    if (index < load_list.length) {
-                        typeLine(load_list[index], () => {
+                function next() {{
+                    if (index < load_list.length) {{
+                        typeLine(load_list[index], () => {{
                             index++;
                             next();
-                        }, loadingScreen);
-                    } else {
-                        setTimeout(() => {
+                        }}, loadingScreen);
+                    }} else {{
+                        setTimeout(() => {{
                             loadingScreen.style.display = "none";
 
 const leftImg = document.createElement("img");
@@ -230,15 +230,15 @@ document.body.appendChild(leftImg);
 document.body.appendChild(rightImg);
 
 showCursorAfterDelay();
-                        }, 1000);
-                    }
-                }
+                        }}, 1000);
+                    }}
+                }}
 
                 next();
-            });
-        }
+            }});
+        }}
 
-        function showCursorAfterDelayShutdown() {
+        function showCursorAfterDelayShutdown() {{
     // Ensure background is pure black and all visuals removed
     document.querySelectorAll('.bg-img').forEach(img => img.remove());
     document.body.style.backgroundImage = "none";
@@ -263,7 +263,7 @@ showCursorAfterDelay();
     let isVisible = true;
     let lastBlinkTime = START_TIME;
 
-    function animate() {
+    function animate() {{
         const currentTime = Date.now();
         const elapsedTime = currentTime - START_TIME;
         const progress = Math.min(elapsedTime / DURATION, 1);
@@ -274,24 +274,24 @@ showCursorAfterDelay();
         const currentBlinkInterval = INITIAL_BLINK_INTERVAL +
             (FINAL_BLINK_INTERVAL - INITIAL_BLINK_INTERVAL) * progress;
 
-        if (currentTime - lastBlinkTime > currentBlinkInterval) {
+        if (currentTime - lastBlinkTime > currentBlinkInterval) {{
             isVisible = !isVisible;
             cursor.style.visibility = isVisible ? "visible" : "hidden";
             lastBlinkTime = currentTime;
-        }
+        }}
 
-        if (progress < 1) {
+        if (progress < 1) {{
             requestAnimationFrame(animate);
-        } else {
+        }} else {{
             cursorWrapper.style.display = "none";
-        }
-    }
+        }}
+    }}
 
     requestAnimationFrame(animate);
-}
+}}
 
 
-        function showCursorAfterDelay() {
+        function showCursorAfterDelay() {{
             document.getElementById("titleOverlay").style.display = "block";
 
             const cursorWrapper = document.createElement("div");
@@ -300,34 +300,34 @@ showCursorAfterDelay();
             cursorWrapper.style.position = "relative";
             document.body.appendChild(cursorWrapper);
 
-            setTimeout(() => {
+            setTimeout(() => {{
                 document.querySelector("#cursorWrapper").style.display = "none";
                 startConversation();
-            }, 5000);
-        }
+            }}, 5000);
+        }}
 
-        function startConversation() {
+        function startConversation() {{
             document.getElementById("passwordPrompt").style.display = "none";
             document.getElementById("conversation").style.display = "flex";
 
-            start_node_temp = "e5kv+lrZQdEMFA0tddr5yQa1hbzi29S8VmgmGpyaYTPedZGs0ise/SmODiqr6P/+sh6V6+m2cW13WCxMNspp6mFFGEG1NGA4FgQ1wK5tPrQcMTsrz594qGOz/wOjxqcU";
-            decryptText(start_node_temp, password).then((start_node) => {
+            start_node_temp = "{start_node_enc}";
+            decryptText(start_node_temp, password).then((start_node) => {{
             showNode(start_node);
-            }
+            }}
             )
 
-        }
+        }}
 
         let password = "";
 
-        async function showNode(tag) {
+    async function showNode(tag) {{
     const node = encryptedTree[tag];
     if (!node) return;
 
-    if (tag === "0d4e430c024139d32e3da7660962d250f70f51a5d54cbd7800ca9f2320fdddae") {
+    if (tag === "{end_node}") {{
         showShutdownAnimation();
         return;
-    }
+    }}
 
     const textContainer = document.getElementById("textContainer");
     const buttonContainer = document.getElementById("buttonContainer");
@@ -350,22 +350,23 @@ showCursorAfterDelay();
     cursor.textContent = "█";
     p.appendChild(cursor);
 
-    for (const opt of node.options) {
+    for (const opt of node.options) {{
         const decryptedOption = await decryptText(opt.text, password);
         const btn = document.createElement("button");
         btn.textContent = decryptedOption;
-        btn.onclick = async () => {
+        btn.onclick = async () => {{
             textContainer.innerHTML = "";
             buttonContainer.innerHTML = "";
             const decryptedGoto = await decryptText(opt.goto, password);
             await showNode(decryptedGoto);
-        };
+        }};
         buttonContainer.appendChild(btn);
-    }
-}
+    }}
+}}
 
-        function typeText(element, text) {
-            return new Promise(resolve => {
+
+        function typeText(element, text) {{
+            return new Promise(resolve => {{
                 let i = 0;
                 element.textContent = "";
                 element.style.whiteSpace = "pre-wrap";
@@ -374,97 +375,97 @@ showCursorAfterDelay();
                 cursor.classList.add("blink");
                 element.appendChild(cursor);
 
-                function type() {
-                    if (i < text.length) {
+                function type() {{
+                    if (i < text.length) {{
                         const char = text.charAt(i++);
                         cursor.before(char);
                         setTimeout(type, 50);
-                    } else {
+                    }} else {{
                         cursor.remove();
                         resolve();
-                    }
-                }
+                    }}
+                }}
                 type();
-            });
-        }
+            }});
+        }}
 
-        document.getElementById("password").addEventListener("keydown", async function(event) {
-            if (event.key === "Enter") {
+        document.getElementById("password").addEventListener("keydown", async function(event) {{
+            if (event.key === "Enter") {{
                 password = this.value;
-                try {
+                try {{
                     await decryptText(encryptedTree["18f6b0200b6fd32ce4e85b6c841f72247964195b8e1cd7c52e046dc51e48f779"].text, password);
                     document.getElementById("passwordPrompt").style.display = "none";
                     showLoadingScreen();
-                } catch (e) {}
-            }
-        });
+                }} catch (e) {{}}
+            }}
+        }});
 
-        function playBackgroundAudio() {
+        function playBackgroundAudio() {{
             const audio = document.getElementById("backgroundAudio");
             audio.volume = 0;
 
-            audio.play().then(() => {
+            audio.play().then(() => {{
                 let fadeDuration = 5000;
                 let step = 1000;
                 let totalSteps = fadeDuration / step;
                 let volumeStep = 1 / totalSteps;
                 let currentVolume = 0;
 
-                const fadeInterval = setInterval(() => {
+                const fadeInterval = setInterval(() => {{
                     currentVolume += volumeStep;
-                    if (currentVolume >= 1) {
+                    if (currentVolume >= 1) {{
                         audio.volume = 1;
                         clearInterval(fadeInterval);
-                    } else {
+                    }} else {{
                         audio.volume = currentVolume;
-                    }
-                }, step);
-            }).catch(e => {
+                    }}
+                }}, step);
+            }}).catch(e => {{
                 console.log("Audio konnte nicht automatisch gestartet werden:", e);
-            });
-        }
+            }});
+        }}
 
-        function stopBackgroundAudio() {
+        function stopBackgroundAudio() {{
             const audio = document.getElementById("backgroundAudio");
             audio.pause();
             audio.currentTime = 0;
-        }
+        }}
 
-        function showShutdownAnimation() {
+        function showShutdownAnimation() {{
             stopBackgroundAudio();
             document.body.style.backgroundImage = "";
             const loadingScreen = document.createElement("div");
             loadingScreen.id = "loadingScreen";
             document.body.appendChild(loadingScreen);
 
-            const shutdownMessages = "25LyCLYBwor43sj2Ti9mvxoGTwyiHupAMpGpW0ZK9VJGwsJuBT2thy93s2Gxj+txGFB2Xbvk8OD0N/WzHvwSoUKoUAnsv0sEM76xKFD3XrsrLwpEqj/kTZO493FiT6k0IIUQQzGoIO0chq723j5Z2WGE+87FqQmHGEgggwX+G4BZ+jG36Z/6jsYokCVxMwyzJk4nhukL5Kjo3YZhorKN0xOQouyAHgNQFp6Iojuyzh5AWDYy/Y6PwSiqv1/v4mj9O5farDPJFZ7WLng9Ph+KrhxmuTU0DJSN1YNSXxgToE3kkTQEoTmUAb2lb1bXaAvk2Q84QcXQlYS2bEc9Ck/0QvJwlhF7xKK7DXFPfLnOsG+aw4VVm7lxKB4IAnyopvTawV0dy8w6ly3YYVPVt83CnHLcvvqAxDReZlTdyBZleYPJ6QKhYFsOAFSujKEaZgVKay3/TbchbfNoJO5MbdTJKC0gMD35Wd7ncbYS1Gv3eEcYdZstkcA2LVauJCwo6EO2Mwch2+NhTC4y578FBOkEOnid03IEs74QlzyEOsQ/cEBzIIqsdxHNPVo/4JKbqc/kTMVlqfsC5ya+L78zjNpDPpqZ6nqkfuC5fKXr+xYyKzWuEve6CSZomTmzsHbn2miYcFTP0Tzn/yQaNKRwjTfflf6Fq1RiFJjyQtjsMX0ZStCXweKgAUVasZPnhyVB085d6vxLNIM6K78+9hK1F3ih7K9gTxbIXePmyWIKQ5oZOiAljBrND/DKDvcRF1iX68JwnbqxQl/ZXOIHn51tDX+pJ1LtW0Qz0NKmull6M3j2ISklbjVND005F+xA/47hFqa0ycKxjLUs4+Jh2/EFawh1mq2MK6SocEuwCdcIkHp+0s19YmItnCdCmFppMvH0Ply2mu47SkY6YIA0H+TG/eIWqwqBxfVmsnwuAkGHBM81S1DAW8xmb4rnPKWWtF7kZET+KkTTZTUS92COyLbZ8v71GHEcF5Ge65CthiPfeG/tPrzlI/kBQXMRnP5CxTJ5386SpxJBSv5v5PjyN7pHvHzgXipX/K6mPJEXgYKADuxidE4ypfRjH0W2E12xBLtf1oUX1a3I57Z0J9IgfPDSPFqdw+VnuayGQ7xN4VzVpgwg1c0GDuR0h8OoX5wJmyOuG5z43NP590IcLUQqw//8nakyjxu2e8yDaOn+tVbKCnh6wdAUIK2XcX9E/xLXw9EuxARSOgiHGWIU8ZM8FPq8WIPa1Ny8LnJKKpcZr4vBU1i6UA5qpvvaII2bf28iBlrbs1uDFzhaCVSH/Hisn5u6ZjSGc0qPEdzdJEolx30j33Fbp0QFEEH6FjvXcnAUIPTx+s2aZc/LeRWmSbyXnHEQ6GheHKGPdJ7xD9A2uof+Uls6/ZU0YTg0+iVV+LH5wKZeLQHg2mHeXn74vMv9gi82cSJhvParGOLaxgBPGTn+TSGxvd+bb/F17xp2dAAHQtLOex8nrIwO2lj3n9UqRUT720wFRBTIv+jPdlQ1mVVH5IjU8iY9XfUNwrxIoOorRWnvvWJVV5nR2euqNQ0HAlJTA0nefBTHw0Er5e2on5TdA9MepGD8k63YCXW+vbF6acQ7aRAdXxZ0/wRwaaCVSjQioekNa0up2SArAsh82TR72oRWUBfq5T7C6/XcYmjvGdVUJS/gKtxjREobDnAwyyj2nBg1P9eAiZEX/qi7xb0ILOnjo/VywPn2JFfvPlzQET3LmM+DkHJEeRp78eZ3s6FV3mSozZ2snpOktalrRpzb0sBShRtTfwLNq9sOP6/PL+j8/imUobhiYc+j+Nj4iF8ZqmZVS0LtYtvc7p4GMFuumalKUq8Xu0DkMY3JDMO3n7UFGRT5xmf7LbT6PeV/HhEwVGc5qv8XU8EA0qR7t4FpV84mSfbpKkLxW4/XiE2ectelel3pGlgebspfQAnUQg6QqWwyjiN2ecTycBJ6+89BfVhjnXUs8Y/X2v6KBuzS6NnSjDar";
+            const shutdownMessages = "{enc_shutdown_messages}";
 
-            decryptText(shutdownMessages, password).then((shut) => {
+            decryptText(shutdownMessages, password).then((shut) => {{
                 shut_list = JSON.parse(shut)
                 let index = 0;
 
-                function next() {
-                    if (index < shut_list.length) {
-                        typeLine(shut_list[index], () => {
+                function next() {{
+                    if (index < shut_list.length) {{
+                        typeLine(shut_list[index], () => {{
                             index++;
                             next();
-                        }, loadingScreen);
-                    } else {
-                        setTimeout(() => {
+                        }}, loadingScreen);
+                    }} else {{
+                        setTimeout(() => {{
                             const titleOverlay = document.getElementById("titleOverlay");
-                            if (titleOverlay) {
+                            if (titleOverlay) {{
                                 titleOverlay.remove();
-                            }
+                            }}
                             loadingScreen.style.display = "none";
                             stopBackgroundAudio();
                             showCursorAfterDelayShutdown();
-                        }, 5000);
-                    }
-                }
+                        }}, 5000);
+                    }}
+                }}
 
                 next();
-            });
-        }
+            }});
+        }}
     </script>
 
     <audio id="backgroundAudio" loop style="display:none;" preload="auto">
