@@ -2954,6 +2954,10 @@ nav ul {
       </div>
     </footer>
 
+    <div class="scroll-top">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
   <script>
 
       function updateCharCount() {
@@ -3106,22 +3110,21 @@ nav ul {
     });
 
     // Scroll to top button
-    document.addEventListener('DOMContentLoaded', function() {
-      const scrollTopBtn = document.getElementById('scroll-top');
+    // Script to handle scroll top button visibility
+    const scrollTopBtn = document.querySelector('.scroll-top');
 
-      window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 300) {
-          scrollTopBtn.classList.add('visible');
-        } else {
-          scrollTopBtn.classList.remove('visible');
-        }
-      });
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
 
-      scrollTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
     });
 
