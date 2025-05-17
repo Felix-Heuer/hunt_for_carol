@@ -6,13 +6,15 @@ from Crypto.Hash import SHA256
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad
 
+with open("config.json","r") as fp:
+    config = json.load(fp)
 
-PATH = "conversation_tree.json"
-PASSWORD = "abcdef"
-START_NODE = "greeting"
-END_NODE = "help_question"
-LOADING_MESSAGES = "loading_messages.json"
-SHUTDOWN_MESSAGES = "shutdown_messages.json"
+PATH = config["path"]
+PASSWORD = config["password"]
+START_NODE = config["start_node"]
+END_NODE = config["end_node"]
+LOADING_MESSAGES = config["loading_messages"]
+SHUTDOWN_MESSAGES = config["shutdown_messages"]
 
 
 class ConversationError(Exception):
@@ -104,6 +106,7 @@ def encrypt_conversation(plaintext_nodes):
 with open(PATH, "r") as fp:
     plaintext_nodes = json.load(fp)
 
+
 with open(LOADING_MESSAGES,"r") as fp:
     loading_messages = json.load(fp)
 
@@ -123,7 +126,7 @@ inlay = {
     "enc_shutdown_messages": encrypt_aes(json.dumps(shutdown_messages)),
 }
 
-with open("html_template.html","r",encoding="utf-8") as fp:
+with open("carol-template.html","r",encoding="utf-8") as fp:
     template = fp.read()
 
 html_code = template.format(**inlay)
