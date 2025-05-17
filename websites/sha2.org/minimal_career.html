@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers | SHA2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <canvas id="network-canvas"></canvas>
+
+  <div class="page-title">
+    <h1>Join Our Team</h1>
+    <p>Build the future of enterprise security with industry leaders</p>
+  </div>
+
+  <div class="page-content">
+    <div class="jobs-container">
+      <!-- Sales Engineer -->
+      <div class="job-card" data-category="business security">
+        <div class="job-header">
+          <span class="job-tag">Business</span>
+          <span class="job-tag">Security</span>
+          <h3>Enterprise Security Sales Engineer</h3>
+          <div class="job-meta">
+            <div>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Chicago, IL (Hybrid)</span>
+            </div>
+            <div>
+              <i class="fas fa-briefcase"></i>
+              <span>Full-time</span>
+            </div>
+          </div>
+        </div>
+        <div class="job-body">
+          <div class="salary-range">
+            <i class="fas fa-dollar-sign"></i>
+            Salary Range: $135,000 - $175,000 / year + Commission
+          </div>
+          <div class="job-btn-container">
+            <button class="apply-btn" data-job="Enterprise Security Sales Engineer">Apply Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="application-form" class="application-form-section">
+      <h2>Apply for a Position</h2>
+      <form class="application-form" id="job-application-form">
+        <div class="form-group">
+          <label for="job-title">Position *</label>
+          <input
+            type="text"
+            id="job-title"
+            class="form-control"
+            placeholder="Select a job above"
+            readonly
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="full-name">Full Name *</label>
+          <input type="text" id="full-name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" class="form-control" required>
+        </div>
+
+
+        <div class="form-group">
+          <label for="message">Why are you the one we should hire next? *</label>
+          <textarea id="message" class="form-control" rows="5" maxlength="500" required></textarea>
+          <small id="char-count" style="display: block; margin-top: 5px;">0 / 500 characters</small>
+        </div>
+        <button type="submit" class="form-submit">Submit Application</button>
+
+        <div class="form-group alternative-application" style="margin-top: 2rem;">
+          <label style="font-weight: bold;">Alternative Application Method</label>
+          <p>If you encounter issues with the form, you may <a href="#" id="alternative-email-link">apply via email</a> by sending the required details to careers@sha2.org.</p>
+          <br>
+          <p>All applications go through an initial automated screening. Qualified submissions are then reviewed thoroughly by our hiring team. We aim to respond to shortlisted candidates within 2 business days.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Function to update character count
+    function updateCharCount() {
+      const messageField = document.getElementById('message');
+      const charCount = document.getElementById('char-count');
+      const currentLength = messageField.value.length;
+      const maxLength = messageField.getAttribute('maxlength');
+      charCount.textContent = `${currentLength} / ${maxLength} characters`;
+    }
+
+    // Scroll to application form when Apply Now is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+      const applyButtons = document.querySelectorAll('.apply-btn');
+      const applicationForm = document.getElementById('application-form');
+      const jobTitleInput = document.getElementById('job-title');
+      const messageField = document.getElementById('message');
+
+      // Initialize character count
+      updateCharCount();
+
+      // Add input event listener for character count
+      messageField.addEventListener('input', updateCharCount);
+
+      applyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const jobTitle = this.dataset.job;
+          jobTitleInput.value = jobTitle;
+
+          applicationForm.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Handle form submission
+      const form = document.getElementById('job-application-form');
+      const alternativeEmailLink = document.getElementById('alternative-email-link');
+
+      // Function to generate mailto link with current form data
+      function generateMailtoLink() {
+        const jobTitle = document.getElementById('job-title').value || 'Job Application';
+        const fullName = document.getElementById('full-name').value || '';
+        const email = document.getElementById('email').value || '';
+        const message = document.getElementById('message').value || '';
+
+        const subject = `Job Application: ${jobTitle}`;
+
+        let body = `Position: ${jobTitle}\n`;
+        body += `Name: ${fullName}\n`;
+        body += `Email: ${email}\n\n`;
+        body += `${message}`;
+
+        return `mailto:careers@sha2.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      }
+
+      // Handle the alternative email link
+      alternativeEmailLink.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.location.href = generateMailtoLink();
+      });
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        window.location.href = generateMailtoLink();
+      });
+    });
+
+    // Scroll to top button functionality
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    if (scrollTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          scrollTopBtn.classList.add('visible');
+        } else {
+          scrollTopBtn.classList.remove('visible');
+        }
+      });
+
+      scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
+    // These functions seem to be for a network visualization
+    // but they're referenced without definition
+    function resize() {
+      // Placeholder for resize function
+      console.log("Resize function called");
+    }
+
+    function draw() {
+      // Placeholder for draw function
+      console.log("Draw function called");
+    }
+
+    // Initialize resize and draw if they're needed
+    if (document.getElementById('network-canvas')) {
+      window.addEventListener('resize', resize);
+      resize();
+      draw();
+    }
+  </script>
+</body>
+</html>
