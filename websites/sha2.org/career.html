@@ -3128,7 +3128,7 @@ nav ul {
       });
     });
 
-    // Simple mailto submission
+// Simple mailto submission
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('job-application-form');
   const alternativeEmailLink = document.getElementById('alternative-email-link');
@@ -3161,11 +3161,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Get the job title value if available
     const jobTitle = document.getElementById('job-title') ? document.getElementById('job-title').value : 'Job Position';
 
-    // Build email content
+    // Get form values (same as in form submission)
+    const fullName = document.getElementById('full-name') ? document.getElementById('full-name').value : '';
+    const email = document.getElementById('email') ? document.getElementById('email').value : '';
+    const message = document.getElementById('message') ? document.getElementById('message').value : '';
+
+    // Build email content (identical to form submission)
     const subject = `Job Application: ${jobTitle}`;
 
     let body = `Position: ${jobTitle}\n`;
-    body += `Please include your full name, contact information, and any relevant details about your application.`;
+    body += `Name: ${fullName}\n`;
+    body += `Email: ${email}\n`;
+    body += `${message}`;
 
     // Create mailto link to careers@sha2.org
     window.location.href = `mailto:careers@sha2.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
