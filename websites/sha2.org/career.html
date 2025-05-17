@@ -2908,7 +2908,7 @@ nav ul {
 
   <div class="form-group alternative-application" style="margin-top: 2rem;">
     <label style="font-weight: bold;">Alternative Application Method</label>
-<p>If you encounter issues with the form, you may apply via email by sending the required details to <a href="mailto:careers@sha2.org">careers@sha2.org</a>.</p>
+<p>If you encounter issues with the form, fill it nonetheless, then apply via email by sending the required details to <a href="#" id="alternative-email-link">careers@sha2.org</a>.</p>
 <br>
 <p>All applications go through an initial automated screening. Qualified submissions are then reviewed thoroughly by our hiring team. We aim to respond to shortlisted candidates within 2 business days.</p>
 
@@ -3129,37 +3129,52 @@ nav ul {
     });
 
     // Simple mailto submission
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById('job-application-form');
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('job-application-form');
+  const alternativeEmailLink = document.getElementById('alternative-email-link');
 
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-        // Get form values
-        const jobTitle = document.getElementById('job-title').value;
-        const fullName = document.getElementById('full-name').value;
-        const email = document.getElementById('email').value;
-        const phone = document.getElementById('phone').value;
-        const linkedin = document.getElementById('linkedin').value;
-        const message = document.getElementById('message').value;
+    // Get form values
+    const jobTitle = document.getElementById('job-title').value;
+    const fullName = document.getElementById('full-name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
 
-        // Build email content
-        const subject = `Job Application: ${jobTitle}`;
+    // Build email content
+    const subject = `Job Application: ${jobTitle}`;
 
-        let body = `Position: ${jobTitle}\n`;
-        body += `Name: ${fullName}\n`;
-        body += `Email: ${email}\n`;
-        body += `Phone: ${phone}\n`;
-        body += `LinkedIn: ${linkedin}\n\n`;
-        body += `${message}`;
+    let body = `Position: ${jobTitle}\n`;
+    body += `Name: ${fullName}\n`;
+    body += `Email: ${email}\n`;
+    body += `${message}`;
 
-        // Create mailto link to careers@sha2.org
-        window.location.href = `mailto:careers@sha2.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      });
-    });
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
+    // Create mailto link to careers@sha2.org
+    window.location.href = `mailto:careers@sha2.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+
+  // Add event listener for the alternative email link
+  alternativeEmailLink.addEventListener('click', function(event) {
+    event.preventDefault();
+
+    // Get the job title value if available
+    const jobTitle = document.getElementById('job-title') ? document.getElementById('job-title').value : 'Job Position';
+
+    // Build email content
+    const subject = `Job Application: ${jobTitle}`;
+
+    let body = `Position: ${jobTitle}\n`;
+    body += `Please include your full name, contact information, and any relevant details about your application.`;
+
+    // Create mailto link to careers@sha2.org
+    window.location.href = `mailto:careers@sha2.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+});
+
+window.addEventListener('resize', resize);
+resize();
+draw();
 </script>
 </body>
 </html>
