@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAROL</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            max-width: 100%;
+        }
+        .letter-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 20px;
+        }
+        .letter {
+            font-size: 120px;
+            color: black;
+            text-decoration: none;
+        }
+        input {
+            width: 80px;
+            text-align: center;
+            margin-top: 10px;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+        }
+        #hash-display {
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: 500;
+            margin-top: 40px;
+            word-break: break-all;
+            max-width: 90%;
+            text-align: center;
+        }
+        #hash-display a {
+            color: black;
+            text-decoration: none;
+        }
+        #hash-display a:visited {
+            color: black;
+        }
+        #hash-display a:hover {
+            color: black;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .letter-column {
+                margin: 5px 0;
+            }
+            .letter {
+                font-size: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .letter {
+                font-size: 60px;
+            }
+            #hash-display {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="letter-column">
+            <a href="https://www.wikipedia.org" class="letter" target="_blank">C</a>
+            <input type="text" class="letter-input" id="input-c">
+        </div>
+        <div class="letter-column">
+            <a href="https://www.archive.org" class="letter" target="_blank">A</a>
+            <input type="text" class="letter-input" id="input-a">
+        </div>
+        <div class="letter-column">
+            <a href="https://www.reddit.com" class="letter" target="_blank">R</a>
+            <input type="text" class="letter-input" id="input-r">
+        </div>
+        <div class="letter-column">
+            <a href="https://www.openstreetmap.org" class="letter" target="_blank">O</a>
+            <input type="text" class="letter-input" id="input-o">
+        </div>
+        <div class="letter-column">
+            <a href="https://www.librarything.com" class="letter" target="_blank">L</a>
+            <input type="text" class="letter-input" id="input-l">
+        </div>
+    </div>
+
+    <div id="hash-display"></div>
+
+    <script>
+        // Fixed strings to display before and after the hash
+        const PREFIX = "https://birthdayattack.org/";
+        const SUFFIX = ".html";
+
+        // Function to calculate SHA-256 hash
+        async function calculateSHA256(text) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+
+            // Convert the hash to a hexadecimal string
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            return hashHex;
+        }
+
+        // Function to update the hash display
+        async function updateHash() {
+            const inputs = document.querySelectorAll('.letter-input');
+            let combinedText = '';
+
+            inputs.forEach(input => {
+                combinedText += input.value;
+            });
+
+            const hash = await calculateSHA256(combinedText);
+            const truncatedHash = hash.substring(0, 60);
+
+            // Construct the full URL from prefix + hash + suffix
+            const fullUrl = PREFIX + truncatedHash + SUFFIX;
+
+            // Display as a clickable link
+            document.getElementById('hash-display').innerHTML =
+                '<a href="' + fullUrl + '" target="_blank">' + fullUrl + '</a>';
+        }
+
+        // Add event listeners to all input fields
+        document.querySelectorAll('.letter-input').forEach(input => {
+            input.addEventListener('input', updateHash);
+        });
+
+        // Initialize hash display
+        updateHash();
+    </script>
+</body>
+</html>

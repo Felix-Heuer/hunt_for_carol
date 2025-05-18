@@ -1,0 +1,8 @@
+{
+  "path": "conversation_tree.json",
+  "password": "abcdef",
+  "start_node": "greeting",
+  "end_node": "help_question",
+  "loading_messages": "loading_messages.json",
+  "shutdown_messages": "shutdown_messages.json"
+}
