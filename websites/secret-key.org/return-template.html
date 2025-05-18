@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    #raccoon {{
+      width: 50%;
+      height: 50%;
+      margin-top: -2.5%;
+      cursor: pointer;
+    }}
+    body.blackout {{
+      background-color: black;
+      color: white;
+      text-align: left;
+    }}
+    #gifContainer {{
+      text-align: center;
+    }}
+    #textContainer {{
+      font-size: 24px;
+      margin-top: 20px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: Consolas, monospace;
+    }}
+  </style>
+</head>
+<body style="background-color:#000;">
+
+  <div id="gifContainer">
+    <img id="raccoon" src="./raccoon.gif" onclick="playSound()">
+  </div>
+
+  <audio id="raccoonSound">
+    <source src="./drama.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="loopSound" loop>
+    <source src="./ticking.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="textContainer"></div>
+
+  <script>
+    function playSound() {{
+      var audio1 = document.getElementById("raccoonSound");
+      var audio2 = document.getElementById("loopSound");
+
+      audio1.play();
+      audio2.volume = 0.5;
+      document.body.classList.add('blackout');
+
+      setTimeout(function() {{
+        audio1.pause();
+        audio1.currentTime = 0;
+        audio2.play();
+
+        var gifContainer = document.getElementById("gifContainer");
+        gifContainer.style.display = 'none';
+
+        displayText();
+      }}, 86000);
+    }}
+
+    function displayText() {{
+      var textContainer = document.getElementById("textContainer");
+      var oStr = '{START_TEXT}';
+      var dStr = atob(oStr);
+
+      var i = 0;
+
+      function addCharacter() {{
+        if (i < dStr.length) {{
+          textContainer.textContent += dStr.slice(i, i + 9);
+          textContainer.scrollIntoView({{ behavior: "smooth", block: "end" }});
+          i += 9;
+          setTimeout(addCharacter, 1000); // Call this function every 1 second
+        }} else {{
+          // Once all characters are displayed, stop the second sound
+          stopLoopSound();
+        }}
+      }}
+
+      addCharacter();
+
+    }}
+
+    function stopLoopSound() {{
+      var audio2 = document.getElementById("loopSound");
+      audio2.pause();
+      audio2.currentTime = 0;
+    }}
+  </script>
+
+</body>
+</html>
