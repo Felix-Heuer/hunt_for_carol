@@ -8,7 +8,11 @@
     },
     "ask_question": {
         "text": ["Sure! What is your question?"],
-        "options": []
+        "options": [
+            {"text": "I have a question.", "goto": "ask_question"},
+            {"text": "I'm just browsing.", "goto": "browsing_end"},
+            {"text": "I need help with something.", "goto": "help_question"}
+        ]
     },
     "browsing_end": {
         "text": ["Okay, feel free to look around."],

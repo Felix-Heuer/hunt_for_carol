@@ -1,10 +1,11 @@
 import json
-import networkx as nx
 from base64 import b64encode
 from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad
+from conversation_tree_analysis import check_json_file
+
 
 with open("config.json","r") as fp:
     config = json.load(fp)
@@ -17,44 +18,7 @@ LOADING_MESSAGES = config["loading_messages"]
 SHUTDOWN_MESSAGES = config["shutdown_messages"]
 
 
-class ConversationError(Exception):
-    pass
 
-def check_conversation_graph(conversation_graph):
-    G = nx.DiGraph()
-
-    for node_id in convo_graph:
-        G.add_node(node_id)
-
-    for node_id, node_data in convo_graph.items():
-        for option in node_data.get("options", []):
-            target = option.get("goto")
-            if target:
-                G.add_edge(node_id, target)
-
-    in_degree_0 = [node for node in G.nodes if G.in_degree(node) == 0]
-    out_degree_0 = [node for node in G.nodes if G.out_degree(node) == 0]
-
-    if START_NODE not in G.nodes:
-        raise ConversationError(f"START NODE {START_NODE} is not a node in the conversation graph.")
-
-    if END_NODE not in G.nodes:
-        raise ConversationError(f"END NODE {END_NODE} is not a node in the conversation graph.")
-
-
-    if START_NODE not in in_degree_0:
-        raise ConversationError(f"START NODE {START_NODE} is not a node with in-degree 0.")
-
-    if END_NODE not in out_degree_0:
-        raise ConversationError(f"END NODE {END_NODE} is not a node with out-degree 0.")
-
-    if len(in_degree_0) > 1:
-        raise ConversationError("Multiple nodes with in-degree 0 in the conversation graph.")
-
-    if len(out_degree_0) > 1:
-        raise ConversationError("Multiple nodes with out-degree 0 in the conversation graph.")
-
-    return 0
 
 def hash_tree(plaintext_nodes):
     plaintext_nodes_hashed = {}
@@ -131,10 +95,10 @@ with open("carol-template.html","r",encoding="utf-8") as fp:
 
 html_code = template.format(**inlay)
 
+check_json_file(PATH,START_NODE,END_NODE)
+
 with open("carol.html", "w", encoding="utf-8") as f:
     f.write(html_code)
 
-# in_zero, out_zero = check_conversation_graph(plaintext_nodes)
 
-for node in plaintext_nodes:
-    print(node, SHA256.new(node.encode()).hexdigest())
+print("Written")
