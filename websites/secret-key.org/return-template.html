@@ -4,10 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    html, body {{
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+    }}
     #raccoon {{
-      width: 50%;
-      height: 50%;
-      margin-top: -2.5%;
+      /*width: 100%;*/
+      height: 100%;
+      object-fit: cover;
       cursor: pointer;
     }}
     body.blackout {{
@@ -17,16 +24,28 @@
     }}
     #gifContainer {{
       text-align: center;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
     }}
     #textContainer {{
-      font-size: 24px;
-      margin-top: 20px;
+      font-size: clamp(16px, 4vw, 24px);
+      padding: 20px;
       white-space: pre-wrap;
       word-wrap: break-word;
       text-align: left;
       width: 100%;
       box-sizing: border-box;
       font-family: Consolas, monospace;
+      overflow-y: auto;
+      height: 100vh;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }}
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    #textContainer::-webkit-scrollbar {{
+      display: none;
     }}
   </style>
 </head>
@@ -77,9 +96,14 @@
       function addCharacter() {{
         if (i < dStr.length) {{
           textContainer.textContent += dStr.slice(i, i + 9);
-          textContainer.scrollIntoView({{ behavior: "smooth", block: "end" }});
+          // Auto-scroll to bottom
+          textContainer.scrollTop = textContainer.scrollHeight;
           i += 9;
-          setTimeout(addCharacter, 1000); // Call this function every 1 second
+
+          // Use requestAnimationFrame to ensure proper timing between frames
+          requestAnimationFrame(function() {{
+            setTimeout(addCharacter, 1000);
+          }});
         }} else {{
           // Once all characters are displayed, stop the second sound
           stopLoopSound();
@@ -87,7 +111,6 @@
       }}
 
       addCharacter();
-
     }}
 
     function stopLoopSound() {{

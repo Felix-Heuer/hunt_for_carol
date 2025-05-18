@@ -2,7 +2,7 @@ import base64
 
 text = """We were just a group of raccoons, doing our thing, when we spotted something special: you. We needed to test you, so we set up a series of cryptographic puzzles, hoping you'd be sharp enough to crack them. And you did. The next thing we knew, you were in: our world, our mission, and trust me, we needed you. Things escalated fast when a rival gang of raccoons came at us full force. We couldn't let them win.
 
-That's when Carol Atkinson stepped in. Working at SHA2.org and feeding us intel through you, helping us keep the upper paw. She was our secret weapon. But just when we thought we had everything under control, she vanished. No warning, no trace.
+That's when Carol stepped in. Working at SHA2.org and feeding us intel through you, helping us keep the upper paw. She was our secret weapon. But just when we thought we had everything under control, she vanished. No warning, no trace.
 
 It's been too long, and I can't shake the feeling that something's wrong. Carol's still out there, hiding, and I need to know why. This is not a drill like our games, this one's real and is going to be tough!
 
