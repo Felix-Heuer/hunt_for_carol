@@ -6,7 +6,7 @@ That's when Carol stepped in. Working at SHA2.org and feeding us intel through y
 
 It's been too long, and I can't shake the feeling that something's wrong. Carol's still out there, hiding, and I need to know why. This is not a drill like our games, this one's real and is going to be tough!
 
-Let's star our investigation at the SHA2 organization. Apply for a job at sha2.org, get inside, and let's uncover the truth. Time to dig deep, figure out what happened - and bring Carol back!
+Let's star our investigation at the SHA2 organization. Apply for a job in cryptography at sha2.org, get inside, and let's uncover the truth. Time to dig deep, figure out what happened - and bring Carol back!
 
         ..                         ..        
        :@@@#+.                 .=#@@@-       
