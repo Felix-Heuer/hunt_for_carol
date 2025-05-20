@@ -51,9 +51,9 @@
       These were supposed to be sunsetted in January:
 
     Also—shouldn't we move away from that signature scheme with homomorphic properties?
-      It's overkill now and potentially introduces complexity we don’t want.
+      It's overkill now and potentially introduces complexity we don't want.
 
-    Oh, and while we’re at it, can we please kill the padding oracle leak in the legacy stack?
+    Oh, and while we're at it, can we please kill the padding oracle leak in the legacy stack?
 
       - Debugging interface for signatures:
       - Debugging interface for padding in CBC mode
@@ -75,14 +75,42 @@
   <div class="body">
     Hi Theo,
 
-    Totally agree on the debug endpoints—they're a liability at this point. I’ll prep a decommission script for review this afternoon.
+    Totally agree on the debug endpoints—they're a liability at this point. I'll prep a decommission script for review this afternoon.
 
-    I’m also in favor of dropping the homomorphic scheme. Unless someone has a use case to defend it, it’s just extra surface area.
+    I'm also in favor of dropping the homomorphic scheme. Unless someone has a use case to defend it, it's just extra surface area.
 
-    And yeah, the padding oracle is still an open wound. It’s not exploitable in prod (as far as we know), but let’s kill it anyway.
+    And yeah, the padding oracle is still an open wound. It's not exploitable in prod (as far as we know), but let's kill it anyway.
 
     Best,<br>
     Isabel
+  </div>
+</div>
+
+<div class="email">
+  <div class="header"><strong>[INTERNAL]</strong><br>
+    From: alex.rodriguez@sha2.org<br>
+    To: secops@sha2.org, devteam@sha2.org<br>
+    Date: Tue, 4 Mar 2025 11:10:19 -0400
+  </div>
+  <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
+  <div class="body">
+    Everyone,
+
+    I just found something really concerning. Carol pushed a commit last Thursday that removed the password hashing function in the auth module. The diff shows she replaced:
+
+    if check_password_hash(stored_hash, user_password):
+        return True
+
+    with:
+
+    if stored_password == user_password:
+        return True
+
+    This is a rookie mistake that completely enables timing side-channel attacks on password verification. The string comparison operator will return early on the first mismatched character, letting attackers determine passwords one character at a time. How did this get through code review? This isn't like Carol at all - she's always been our go-to on cryptographic best practices.
+
+    I've already reverted the commit, but we should figure out what happened here.
+
+    -Alex
   </div>
 </div>
 
@@ -96,7 +124,7 @@
   <div class="body">
     Hey folks,
 
-    Good calls all around. Let’s move fast on this—I'll coordinate with infra to disable the endpoints on staging first.
+    Good calls all around. Let's move fast on this—I'll coordinate with infra to disable the endpoints on staging first.
 
     Side note: has anyone heard from Carol lately? I pinged her about a crypto audit flag on Monday and haven't gotten a response.
 
@@ -113,7 +141,7 @@
   </div>
   <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
   <div class="body">
-    Huh—now that you mention it, I haven’t seen Carol in the SecOps Slack channel since last week. Was she on hold?
+    Huh—now that you mention it, I haven't seen Carol in the SecOps Slack channel since last week. Was she on hold?
 
     Maybe someone should check with her, just in case.
 
@@ -129,10 +157,10 @@
   </div>
   <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
   <div class="body">
-    That’s odd. Carol usually replies fast, especially if it’s anything crypto-related.
-    I’ll try her other work line again but it’s been going straight to voicemail.
+    That's odd. Carol usually replies fast, especially if it's anything crypto-related.
+    I'll try her other work line again but it's been going straight to voicemail.
 
-    Let’s proceed with the cleanup efforts for now—I’ll keep you posted.
+    Let's proceed with the cleanup efforts for now—I'll keep you posted.
 
     Stay sharp,<br>
     Isabel Nguyen
@@ -181,11 +209,11 @@
   </div>
   <div class="subject">Re: Debug APIs and Crypto Hygiene</div>
   <div class="body">
-    Can confirm—last network login was seven days ago. No VPN activity, no workstation pings. That’s not like her at all.
+    Can confirm—last network login was seven days ago. No VPN activity, no workstation pings. That's not like her at all.
 
-    I’ll reach out to Carol’s assistant quietly and see if there’s anything we should know.
+    I'll reach out to Carol's assistant quietly and see if there's anything we should know.
 
-    Let’s not overreact, but yeah… keep your eyes open.
+    Let's not overreact, but yeah… keep your eyes open.
 
     Regards,<br>
     Jamal Foster
